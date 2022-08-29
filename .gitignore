@@ -1,4 +1,10 @@
+# folders
+myvenv/
+results/
+
+# R Files
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+

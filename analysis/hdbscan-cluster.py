@@ -36,7 +36,7 @@ from matplotlib.colors import rgb2hex
 
 plot_kwds = {'alpha' : 0.5, 's' : 80, 'linewidths':0}
 
-DIR="/Users/sp16194/Google Drive/UniWork/projects/kinspace-systems/code/"
+DIR=""
 
 mcs = 10 # smallest cluster size
 metric = 'jaccard'

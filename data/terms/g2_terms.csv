@@ -2,6 +2,7 @@ fFF,fFM,fMF,fMM,mFF,mFM,mMF,mMM,Glottocode
 -kuta,-kuta,-kuta,-kuta,-kuta,-kuta,-kuta,-kuta,abui1241
 ǰamogi,ǰarɨpurãgi,ǰamogi,ǰarɨpurãgi,ǰamogi,ǰarɨpurãgi,ǰamogi,ǰarɨpurãgi,ache1246
 abusyi,mucut,abusyi,mucut,abusyi,mucut,abusyi,mucut,achi1257
+apachi,nukuchi,apachi,nukuchi,apachi,nukuchi,apachi,nukuchi,achu1249
 bap,bap,bap,bap,bap,bap,bap,bap,adan1251
 nguwarli,atnyani,papapa,atnyani,nguwarli,atnyani,papapa,atnyani,adny1235
 grootvader,grootmoeder,grootvader,grootmoeder,grootvader,grootmoeder,grootvader,grootmoeder,afri1274
@@ -37,6 +38,7 @@ yutas,yakke,yutas,yakke,yutas,yakke,yutas,yakke,atay1247
 bumbu,bumbu,bumbu,bumbu,bumbu,bumbu,bumbu,bumbu,atch1238
 kákay,abboq,kákay,abboq,kákay,abboq,kákay,abboq,atta1244
 ɔkatsi,onetsi,ɔkatsi,onetsi,ɔkatsi,onetsi,ɔkatsi,onetsi,avat1244
+atú,atí,atú,atí,atú,atí,atú,atí,awet1244
 ibetumä,ipetä,ibebo,ipebu,ibetumä,ipetä,ibebo,ipebu,ayiw1239
 tētē,nēnē,tētē,nēnē,tētē,nēnē,tētē,nēnē,baca1243
 kami,kami,kami,kami,kami,kami,kami,kami,badi1246
@@ -96,7 +98,7 @@ k:bo,k:a-pwä,k:bo,k:a-pwä,k:bo,k:a-pwä,k:bo,k:a-pwä,burm1266
 opo,opo,opo,opo,opo,opo,opo,opo,buru1303
 mama,mama,mama,mama,mama,mama,mama,mama,bush1247
 tumbuk,tumbuk,tumbuk,tumbuk,tumbuk,tumbuk,tumbuk,tumbuk,butm1237
-qa',kááka,kwa-l,túútu,qa',kááka,kwa-l,túútu,cahu1264
+qa',qa',kwa-l,su,qa',qa',kwa,su,cahu1264
 'apo,'apo,'apo,'apo,'apo,'apo,'apo,'apo,casi1235
 hocʼ-sote,ocʼ-sote,hocʼ-sote,ocʼ-sote,hocʼ-sote,ocʼ-sote,hocʼ-sote,ocʼ-sote,cayu1261
 úyung,úyang,úyung,úyang,úyung,úyang,úyung,úyang,cebu1242
@@ -125,8 +127,9 @@ amui,nai,amui,nai,amui,nai,amui,nai,coca1259
 winpa,numa,inkwo,inika,winpa,numa,inkwo,inika,coco1261
 nabama,nasaka,nabama,nasaka,naˈbama,naˈsaχa,nabama,nasaka,cogu1240
 taʰta,mama,taʰta,mama,taʰta,mama,taʰta,mama,colo1249
-kïnu',kaku',toko',kaku',kïnu',kaku',toko',kaku',coma1245
+kïnu',huci,toko',kaku',kïnu',huci,toko',kaku',coma1245
 nu-mohˑʼ-ho-musʼ,noo-hˑomeʼ,nu-mohˑʼ-ho-musʼ,noo-hˑomeʼ,nu-mohˑʼ-ho-musʼ,noo-hˑomeʼ,nu-mohˑʼ-ho-musʼ,noo-hˑomeʼ,comm1246
+ataatacciaq,anaanacciaq,ataatacciaq,anaanacciaq,ataatacciaq,anaanacciaq,ataatacciaq,anaanacciaq,copp1244
 sîrawidn,damawidn,sîrawidn,damawidn,sîrawidn,damawidn,sîrawidn,damawidn,corn1251
 bébé,bébé,bébé,bébé,bébé,bébé,bébé,bébé,cota1241
 cha-pǔ-chäʼ,cha-pǔʼ-se,cha-pǔ-chäʼ,cha-pǔʼ-se,cha-pǔ-chäʼ,cha-pǔʼ-se,cha-pǔ-chäʼ,cha-pǔʼ-se,cree1270
@@ -191,6 +194,7 @@ pake,beppe,pake,beppe,pake,beppe,pake,beppe,fris1239
 tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,futu1245
 afu,afu,afu,afu,afu,afu,afu,afu,gada1258
 oete,ede,oete,ede,oete,ede,oete,ede,gale1259
+tamuru,notï,tamuru,notï,tamuru,notï,tamuru,notï,gali1262
 t̪ilaːkaː,maːmaː,t̪aːt̪aː,kaːt̪iː,t̪ilaːkaː,maːmaː,t̪aːt̪aː,kaːt̪iː,gami1243
 jjajja,jjajja,jjajja,jjajja,jjajja,jjajja,jjajja,jjajja,gand1255
 nenigai,nenewan,nenigai,nenewan,nenigai,nenewan,nenigai,nenewan,gane1237
@@ -228,7 +232,11 @@ tata-hweyi,nana-hweyi,tata-hweyi,nana-hweyi,tata-hweyi,nana-hweyi,tata-hweyi,nan
 lolo,lola,lolo,lola,lolo,lola,lolo,lola,hili1240
 merádádá,meridádi,merádádá,meridádi,merádádá,meridádi,merádádá,meridádi,hind1269
 huhha-,hanna-,huhha-,hanna-,huhha-,hanna-,huhha-,hanna-,hitt1242
+med͜zhayr,med͜zmayr,med͜zhayr,med͜zmayr,med͜zhayr,med͜zmayr,med͜zhayr,med͜zmayr,homs1234
+kwa,so'o,kwa,so'o,kwa,so'o,kwa,so'o,hopi1249
+wocí,ka'ká,papá,su'sú,wocí,ka'ká,papá,su'sú,huar1255
 nagyapa,nagyanya,nagyapa,nagyanya,nagyapa,nagyanya,nagyapa,nagyanya,hung1274
+pi,pi,pi,pi,pi,pi,pi,pi,hunz1248
 maatcwuñ,tcin,chuwe,tcwo,maatcwuñ,tcin,chuwe,tcwo,hupa1239
 apo,apo,apo,apo,apo,apo,apo,apo,ibal1244
 aki,ini,aki,ini,aki,ini,aki,ini,iban1264
@@ -256,6 +264,7 @@ gran-fāda,gran-māda,gran-fāda,gran-māda,gran-fāda,gran-māda,gran-fa�
 o-je'-sang,o-bä'-sän,o-je'-sang,o-bä'-sän,o-je'-sang,o-bä'-sän,o-je'-sang,o-bä'-sän,japa1256
 simbahkakung,simbahputri,simbahkakung,simbahputri,simbahkakung,simbahputri,simbahkakung,simbahputri,java1254
 sìtsóyéˑ',cìtcóˑ',sìtsóyéˑ',cìtcóˑ',sìtsóyéˑ',cìtcóˑ',sìtsóyéˑ',cìtcóˑ',jica1244
+!kun!a,tun,!kun!a,tun,!kun!a,tun,!kun!a,tun,juho1239
 aamã,a-ái,aamã,a-ái,aamã,a-ái,aamã,a-ái,juru1256
 mbue,mbue,mbue,mbue,mbue,mbue,mbue,mbue,kaba1285
 peran,pati,peran,pati,peran,pati,peran,pati,kada1242
@@ -286,6 +295,7 @@ mbrum,nambwa,mbrum,nambwa,mbrum,nambwa,mbrum,nambwa,katb1237
 bbum,bbuah,bbum,bbuah,bbum,bbuah,bbum,bbuah,katb1237a
 bumbu,nambwa,bumbu,nambwa,bumbu,nambwa,bumbu,nambwa,katb1237b
 matla,ngapapi,thamamu,kamami,matla,ngapapi,thamamu,kamami,kaur1267
+kunu,kagu,togo'o,huci,kunu,kagu,togo'o,huci,kawa1283
 kaŋku,papicu,campaṱu,ŋaricu,kaŋku,papicu,campaṱu,ŋaricu,kaya1318
 ramɨ͂y,yarɨ͂y,ramɨ͂y,yarɨ͂y,ramɨ͂y,yarɨ͂y,ramɨ͂y,yarɨ͂y,kaya1329
 gúúkú,ninéénkúlu,gúúkú,ninéénkúlu,gúúkú,ninéénkúlu,gúúkú,ninéénkúlu,kere1283
@@ -313,6 +323,7 @@ akenju,prenda,akenju,prenda,akenju,prenda,akenju,prenda,kuii1252
 kirlaki,kaparli,nyaanyi,kaparli,kirlaki,kaparli,nyaanyi,kaparli,kuka1246
 kami,babi,ngaji,kami,kami,babi,ngaji,kami,kuku1273
 apua,apua,apua,apua,apua,apua,apua,apua,kuli1254
+bubu,āmā,bubu,āmā,bubu,āmā,bubu,āmā,kuma1273
 kaku,kami,ngatyi,paapany,kaku,kami,ngatyi,paapany,kumb1268
 уллуата,къартана,уллуата,къартана,уллуата,къартана,уллуата,къартана,kumy1244
 abmiŋar,adiŋar,adiŋar,abmiŋar,abmiŋar,adiŋar,adiŋar,abmiŋar,kunj1248
@@ -367,7 +378,7 @@ kaku,kaku,kaku,kaku,kaku,kaku,kaku,kaku,luba1249
 kaka,kaka,kaka,kaka,kaka,kaka,kaka,kaka,luba1250
 apunleyaki,apunbebyai,apunleyaki,apunbebyai,apunleyaki,apunbebyai,apunleyaki,apunbebyai,lubu1243
 kaka,wao,kaka,wao,kaka,wao,kaka,wao,lugu1238
-ká',qá',kwá',túutu,ká',qá',kwá',túutu,luis1253
+kwá'a,ká'néshmal,kwá',túutu,kwá'a,ká'néshmal,kwá',túutu,luis1253
 nkaka,nkaka,nkaka,nkaka,nkaka,nkaka,nkaka,nkaka,lund1266
 nkaka,nkaka,nkaka,nkaka,nkaka,nkaka,nkaka,nkaka,luva1239
 grousspapp,groussmamm,grousspapp,groussmamm,grousspapp,groussmamm,grousspapp,groussmamm,luxe1241
@@ -451,7 +462,7 @@ mbamba,mbamba,mbamba,mbamba,mbamba,mbamba,mbamba,mbamba,mokp1239
 owo,eme,owo,eme,owo,eme,owo,eme,mong1331
 nkoko,nkoko,nkoko,nkoko,nkoko,nkoko,nkoko,nkoko,mong1338
 tua,tete,tua,tete,tua,tete,tua,tete,mono1273
-kïnu,hutsi,togó',hucí,kïnu,hutsi,togó',hucí,mono1275
+gunu,hutsi,toko,mu,gunu,hutsi,toko,mu,mono1275
 ue,ue,ue,ue,ue,ue,ue,ue,mori1268
 ue,ue,ue,ue,ue,ue,ue,ue,mori1269
 mbue,mbue,mbue,mbue,mbue,mbue,mbue,mbue,moro1287
@@ -461,10 +472,11 @@ tupui,tupui,tupui,tupui,tupui,tupui,tupui,tupui,mota1237
 bōbō,bōbō,bōbō,bōbō,bōbō,bōbō,bōbō,bōbō,motl1237
 tupugu,tupugu,tupugu,tupugu,tupugu,tupugu,tupugu,tupugu,motu1246
 aia,aia,aia,aia,aia,aia,aia,aia,mouk1240a
+nonoʔo,nonoʔo,nonoʔo,nonoʔo,nonoʔo,nonoʔo,nonoʔo,nonoʔo,movi1243
 chin2,chinknee1,knee2,finger1,chin2,chinknee1,knee2,finger1,mudb1240
 tubu,tubu,tubu,tubu,tubu,tubu,tubu,tubu,mudu1242
 awa,awa,awa,awa,awa,awa,awa,awa,muna1247
-ájójót,aǰɨ̃ɲ-ǰɨ̃ɲ,o-ʃipit,aǰɨ̃ɲ-ǰɨ̃ɲ,ájójót,aǰɨ̃ɲ-ǰɨ̃ɲ,o-ʃipit,aǰɨ̃ɲ-ǰɨ̃ɲ,mund1330
+aǰoǰot,aǰɨ̃ɲ-ǰɨ̃ɲ,aǰoǰot,aǰɨ̃ɲ-ǰɨ̃ɲ,aǰoǰot,aǰɨ̃ɲ-ǰɨ̃ɲ,aǰoǰot,aǰɨ̃ɲ-ǰɨ̃ɲ,mund1330
 dǒ,kǎ,dǒ,kǎ,dǒ,kǎ,dǒ,kǎ,mung1266
 tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,mung1270
 tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,mung1271
@@ -490,6 +502,7 @@ kake,kake,kake,kake,kake,kake,kake,kake,nenn1238
 kake,kake,kake,kake,kake,kake,kake,kake,nenn1238a
 bāje,bōzū,bāzēī,bōzū,bāje,bōzū,bāzēī,bōzū,nepa1254
 bubunasub,bubulekhtarr,bubunasub,bubulekhtarr,bubunasub,bubulekhtarr,bubunasub,bubulekhtarr,nese1235
+ittuq,ningiuq,ittuq,ningiuq,ittuq,ningiuq,ittuq,ningiuq,nets1241
 tyamu,kaparli,tyamu,kaparli,tyamu,kaparli,tyamu,kaparli,ngaa1240
 kak:ak,mimiʔ,mamamʔ,kak:ak,kak:ak,mimiʔ,mamamʔ,kak:ak,ngal1292
 kaku,ngapupu,tyawityi,tyatyu,kaku,ngapupu,tyawityi,tyatyu,ngar1235
@@ -509,8 +522,10 @@ t̃ɨp̃ɨ,t̃ɨp̃ɨ,t̃ɨp̃ɨ,t̃ɨp̃ɨ,t̃ɨp̃ɨ,t̃ɨp̃ɨ,t̃ɨp̃ɨ,t̃
 ikitailalaki,ikitaifafai,ikitailalaki,ikitaifafai,ikitailalaki,ikitaifafai,ikitailalaki,ikitaifafai,nort2877
 čʰan,náan,čʰan,náan,čʰan,náan,čʰan,náan,nort2938
 setsée,setsį,setsée,setsį,setsée,setsį,setsée,setsį,nort2942
+atata,aana,atata,aana,atata,aana,atata,aana,nort2944
 a,saka,pa,kesi,a,saka,pa,kesi,nort2951
 sakam,sasam,hopam,kotom,sakam,sasam,hopam,kotom,nort2952
+nomoshom,nokom,nomoshom,nokom,nomoshom,nokom,nomoshom,nokom,nort2961
 aba,ama,atsa,aka,aba,ama,atsa,aka,nort2966
 zeze-'zrõã,papa-'ǰora,zeze-'zrõã,papa-'ǰora,zeze-'zrõã,papa-'ǰora,zeze-'zrõã,papa-'ǰora,nort2972
 bestefar,bestemor,bestefar,bestemor,bestefar,bestemor,bestefar,bestemor,norw1259
@@ -537,7 +552,7 @@ ne-misʼ-sho-mis,no-ko-misʼ,ne-misʼ-sho-mis,no-ko-misʼ,ne-misʼ-sho-mis,no-ko
 tubung,tubung,tubung,tubung,tubung,tubung,tubung,tubung,olal1237
 sābā,sābtā,sābā,sābtā,sābā,sābtā,sābā,sābtā,olda1245
 ealdefæder,ealdemōdor,ealdefæder,ealdemōdor,ealdefæder,ealdemōdor,ealdefæder,ealdemōdor,olde1238
-altvater,altmuoter,altvater,altmuoter,altvater,altmuoter,altvater,altmuoter,oldh1241
+altvater,uota,altvater,uota,altvater,uota,altvater,uota,oldh1241
 senathair,senmáthair,senathair,senmáthair,senathair,senmáthair,senathair,senmáthair,oldi1245
 foður-faðir,foður-mōðir,mōður-faðir,mōður-mōðir,foður-faðir,foður-mōðir,mōður-faðir,mōður-mōðir,oldn1244
 hendad,henfam,hendad,henfam,hendad,henfam,hendad,henfam,oldw1239
@@ -577,7 +592,6 @@ tartarta,kami,tartarta,kami,tartarta,kami,tartarta,kami,pint1250
 amu,kami,amu,kami,amu,kami,amu,kami,pitj1243
 ngartarta,ngathanha,ngathanha,kanyini,ngartarta,ngathanha,ngathanha,kanyini,pitt1247
 me-mo-someʼ,nohˑ-komeʼ,me-mo-someʼ,nohˑ-komeʼ,me-mo-someʼ,nohˑ-komeʼ,me-mo-someʼ,nohˑ-komeʼ,plai1258
-raibè,renibè,raibè,renibè,raibè,renibè,raibè,renibè,plat1254
 pahpa,ihnkahlap,pahpa,ihnkahlap,pahpa,ihnkahlap,pahpa,ihnkahlap,pohn1238
 pahpakahlap,ihnkahlap,pahpakahlap,ihnkahlap,pahpakahlap,ihnkahlap,pahpakahlap,ihnkahlap,pohn1238a
 dziadek,babka,dziadek,babka,dziadek,babka,dziadek,babka,poli1260
@@ -593,6 +607,7 @@ hada-mãĩ,hanĩ,hada-mãĩ,hanĩ,hada-mãĩ,hanĩ,hada-mãĩ,hanĩ,
 tumoan,tumoan,tumoan,tumoan,tumoan,tumoan,tumoan,tumoan,puyu1239
 y'phu,y'phe,y'phu,y'phe,y'phu,y'phe,y'phu,y'phe,pwoo1239
 yersas,ḳyewo-seles,yersas,ḳyewo-seles,yersas,ḳyewo-seles,yersas,ḳyewo-seles,qawa1238
+napáw,namáw,nakwéw,nakyéw,napáw,namáw,nakwéw,nakyéw,quec1382
 aê,aduôn,aê,aduôn,aê,aduôn,aê,aduôn,rade1240
 peepe,peepe,peepe,peepe,peepe,peepe,peepe,peepe,raha1237
 tupunatane,tupunawahine,tupunatane,tupunawahine,tupunatane,tupunawahine,tupunatane,tupunawahine,raka1237
@@ -630,7 +645,7 @@ ilʸčʸa,imɨlʸa,ilʸčʸa,imɨlʸa,ilʸčʸa,imɨlʸa,ilʸčʸa,imɨlʸa,
 hocʼ-sote,ocʼ-sote,hocʼ-sote,ocʼ-sote,hocʼ-sote,ocʼ-sote,hocʼ-sote,ocʼ-sote,sene1264
 ded,baba,ded,baba,ded,baba,ded,baba,serb1264
 -apaš,-akt,-apaš,-akt,-apaš,-akt,-apaš,-akt,seri1257
--ka',-kak-,kwaari',čuuri',-ka',-kak-,kwaari',čuuri',serr1255
+ka',-kak-,kwat,tcur,ka',-kak-,kwat,tcur,serr1255
 yǎphu,yǎphie,yǎphu,yǎphie,yǎphu,yǎphie,yǎphu,yǎphie,sgaw1245
 aʔ5tiɑ55,hæ51bu13-33,ŋɑ31-13koŋ55-31,ŋɑ31-13bu13-33,aʔ5tiɑ55,hæ51bu13-33,ŋɑ31-13koŋ55-31,ŋɑ31-13bu13-33,shan1293
 atsmo,atsmo,akwit,atcidi,atsmo,atsmo,akwit,atcidi,shas1239
@@ -639,6 +654,7 @@ gáwa,gàma,gáwa,gàma,gáwa,gàma,gáwa,gàma,sher1255
 shakulu,mugaaka,shakulu,mugaaka,shakulu,mugaaka,shakulu,mugaaka,shii1238
 qʼux̌dudid,qʼaˤsdɨnin,qʼux̌dudid,qʼaˤsdɨnin,qʼux̌dudid,qʼaˤsdɨnin,qʼux̌dudid,qʼaˤsdɨnin,shin1265
 papayósi,títayoshan,yósishoco,títayoshan,papayósi,títayoshan,yósishoco,títayoshan,ship1254
+kïnu,kaku,toko,hucci,kïnu,kaku,toko,hucci,shos1248
 tahen,uyon,tahen,uyon,tahen,uyon,tahen,uyon,siee1239
 tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,sika1261
 dāḍo,ḍāḍī,nāno,nānī,dāḍo,ḍāḍī,nāno,nānī,sind1272
@@ -669,6 +685,7 @@ avi,àvia,avi,àvia,avi,àvia,avi,àvia,stan1289
 grand-père,grand-mère,grand-père,grand-mère,grand-père,grand-mère,grand-père,grand-mère,stan1290
 ˈɡɹænfɑː.ðə,ˈɡɹænmʌðə,ˈɡɹænfɑː.ðə,ˈɡɹænmʌðə,ˈɡɹænfɑː.ðə,ˈɡɹænmʌðə,ˈɡɹænfɑː.ðə,ˈɡɹænmʌðə,stan1293
 ˈɡʀoːsˌfaːtɐ,ˈɡʀoːsˌmʊtɐ,ˈɡʀoːsˌfaːtɐ,ˈɡʀoːsˌmʊtɐ,ˈɡʀoːsˌfaːtɐ,ˈɡʀoːsˌmʊtɐ,ˈɡʀoːsˌfaːtɐ,ˈɡʀoːsˌmʊtɐ,stan1295
+ʒd,ʒdɑ,ʒd,ʒdɑ,ʒd,ʒdɑ,ʒd,ʒdɑ,stan1323
 ˈɛwɛ,ˈɛwɛ,ˈɛwɛ,ˈɛwɛ,ˈɛwɛ,ˈɛwɛ,ˈɛwɛ,ˈɛwɛ,suki1245
 kaakha,kaakha,kaakha,kaakha,kaakha,kaakha,kaakha,kaakha,suku1259
 guukub,maama,guukub,maama,guukub,maama,guukub,maama,suku1261
@@ -719,6 +736,7 @@ kookoqo,kookoqo,kookoqo,kookoqo,kookoqo,kookoqo,kookoqo,kookoqo,toab1237
 l-apiʔ,l-kote,l-apiʔ,l-kote,l-apiʔ,l-kote,l-apiʔ,l-kote,toba1269
 miamosgee,miamosgee,mirarikee,mirarikee,miamosgee,miamosgee,mirarikee,mirarikee,toca1235
 piān,piāv,piān,piāv,piān,piāv,piān,piāv,toda1252
+wosk,ka'a,woji,hu'ul,wosk,ka'a,woji,hu'ul,toho1245
 tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,toke1240
 tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,tupuna,toke1240a
 pupu,pupu,pupu,pupu,pupu,pupu,pupu,pupu,tokp1240
@@ -740,6 +758,8 @@ haiei,hatseda,haiei,hatseda,haiei,hatseda,haiei,hatseda,trum1247
 kokwane,kokwane,kokwane,kokwane,kokwane,kokwane,kokwane,kokwane,tson1249
 rre-mogolo,mme-mogolo,rre-mogolo,mme-mogolo,rre-mogolo,mme-mogolo,rre-mogolo,mme-mogolo,tswa1253
 metuaru'au,metuaru'au,metuaru'au,metuaru'au,metuaru'au,metuaru'au,metuaru'au,metuaru'au,tuam1242
+akkaa-,ucuu,aakiš-t,ucuu,akkaa-,ucuu,aakiš-t,ucuu,tuba1278
+suu,zuú,su,zuú,suu,zuú,su,zuú,tuba1279
 tupunatane,tupunavahine,tupunatane,tupunavahine,tupunatane,tupunavahine,tupunatane,tupunavahine,tubu1240
 pajkéró,maákó,pajkéró,maúkó,pajkéró,maákó,pajkéró,maúkó,tuca1252
 ompu,ompu,ompu,ompu,ompu,ompu,ompu,ompu,tuka1249
@@ -774,6 +794,7 @@ tubuk,tubuk,tubuk,tubuk,tubuk,tubuk,tubuk,tubuk,vure1239
 kathukathu,iperi,kuthuthu,iperi,kathukathu,iperi,kuthuthu,iperi,waga1260
 ue,ue,ue,ue,ue,ue,ue,ue,waia1242
 al,tcûn,tcugi,tco,al,tcûn,tcugi,tco,wail1244
+mee,wi,mee,wi,mee,wi,mee,wi,waim1253
 ñihkü̃,ñihkó,ñihkü̃,ñihkó,ñihkü̃,ñihkó,ñihkü̃,ñihkó,waim1255
 ∅-φori-n,yɨ-noči,∅-φori-n,yɨ-noči,∅-φori-n,yɨ-noči,∅-φori-n,yɨ-noči,waiw1244
 kami,kanytyari,kami,kanytyari,kami,kanytyari,kami,kanytyari,waja1257

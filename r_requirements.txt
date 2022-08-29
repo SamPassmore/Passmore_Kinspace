@@ -7,4 +7,5 @@ vegan
 tidyr
 boot
 Rmisc
+dichromat
 dagitty

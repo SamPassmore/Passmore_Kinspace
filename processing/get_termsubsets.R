@@ -34,9 +34,9 @@ clean_kinterms = function(kinterm){
 # clean_kinterms("(bro)brother   ;bro)") ## this fails
 
 ### Read in CLDF
-languages = read.csv('raw/kinbank/kinbank/cldf/languages.csv', stringsAsFactors = FALSE)
-parameters = read.csv('raw/kinbank/kinbank/cldf/parameters.csv', stringsAsFactors = FALSE)
-terms = read.csv('raw/kinbank/kinbank/cldf/forms.csv', na.strings = c("0", "", NULL, "NULL"), stringsAsFactors = FALSE)
+languages = read.csv('kinbank/kinbank/cldf/languages.csv', stringsAsFactors = FALSE)
+parameters = read.csv('kinbank/kinbank/cldf/parameters.csv', stringsAsFactors = FALSE)
+terms = read.csv('kinbank/kinbank/cldf/forms.csv', na.strings = c("0", "", NULL, "NULL"), stringsAsFactors = FALSE)
 ### Join CLDF into a single DF
 terms = left_join(terms, parameters, by = c("Parameter_ID" = "ID"), suffix = c(".terms", ".parameter")) %>% 
   left_join(., languages, by = c("Language_ID" = "ID"), suffix = c(".parameters", ".language"))

@@ -20,10 +20,6 @@ help:
 clean: 
 	rm -rf raw
 
-# install data from kinbank
-initialize:
-	git submodule add $(KINBANK_REPO) $(KINBANK)
-
 # Clone and Update the data
 data:
 	git submodule init 
@@ -45,8 +41,9 @@ cluster:
 	mkdir -p results/umap
 	mkdir -p results/tsne
 	mkdir -p results/hdbscan
-	jupyter nbconvert --to python analysis/hdbscan-cluster.ipynb # convert notebook to a script
-	python analysis/hdbscan-cluster.py
+	python3 -m venv myvenv
+	myvenv/bin/pip3 install -r requirements.txt 
+	myvenv/bin/python3 analysis/hdbscan-cluster.py
 	
 # manually determine clusters & their DAGs
 # DAGs are directed by the addition of a term (although direction is not indiciative of change likelihood)

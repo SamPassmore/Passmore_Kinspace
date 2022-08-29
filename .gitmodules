@@ -1,0 +1,6 @@
+[submodule "kinbank"]
+	path = kinbank
+	url = https://github.com/kinbank/kinbank
+[submodule "dplace-data"]
+	path = dplace-data
+	url = https://github.com/D-PLACE/dplace-data.git
