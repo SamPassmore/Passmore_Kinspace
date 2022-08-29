@@ -1,5 +1,0 @@
-Running on host node35-002
-Time is Mon Feb 3 16:39:44 GMT 2020
-Directory is /newhome/sp16194/kinspace2
-PBS job ID is 9159680.master.cm.cluster
-This jobs runs on the following machines: echo node35-002
