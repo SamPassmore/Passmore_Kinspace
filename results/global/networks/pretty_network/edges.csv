@@ -1,0 +1,25 @@
+Source,Target,weight
+1 (eB yB eZ yZ),12 X //,1
+1 (eB yB eZ yZ),10 (eB eZ)(yB yZ),2
+1 (eB yB eZ yZ),4 (eB yB) (eZ yZ),2
+12 X //,0 mX fX m// f//,2
+4 (eB yB) (eZ yZ),2 eB eZ yB yZ,3
+11 // mX fX,0 mX fX m// f//,4
+12 X //,11 // mX fX,4
+12 X //,13 X e// y//,4
+12 X //,14 X  m// f//,4
+14 X  m// f//,0 mX fX m// f//,4
+4 (eB yB) (eZ yZ),3 eB yB (eZ yZ),4
+0 mX fX m// f//,7 fX mX fe// fy// me// fy//,6
+11 // mX fX,8 e// y//  mX fX,6
+13 X e// y//,8 e// y//  mX fX,6
+8 e// y//  mX fX,7 fX mX fe// fy// me// fy//,6
+10 (eB eZ)(yB yZ),6 eB eZ (yB yZ),8
+10 (eB eZ)(yB yZ),9 (eB eZ) yB yZ,8
+3 eB yB (eZ yZ),2 eB eZ yB yZ,8
+4 (eB yB) (eZ yZ),5 (eB yB) eZ yZ,8
+5 (eB yB) eZ yZ,2 eB eZ yB yZ,8
+6 eB eZ (yB yZ),2 eB eZ yB yZ,8
+9 (eB eZ) yB yZ,2 eB eZ yB yZ,8
+2 eB eZ yB yZ,NA,
+7 fX mX fe// fy// me// fy//,NA,

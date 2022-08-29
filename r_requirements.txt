@@ -1,0 +1,10 @@
+readxl
+dplyr
+ggdag
+ggplot2
+igraph
+vegan
+tidyr
+boot
+Rmisc
+dagitty

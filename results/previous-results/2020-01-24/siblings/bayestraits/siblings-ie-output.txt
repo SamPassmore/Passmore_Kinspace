@@ -1,0 +1,11 @@
+Running on host node32-038
+Time is Mon Nov 4 16:42:10 GMT 2019
+Directory is /newhome/sp16194/kinspace/code
+PBS job ID is 8865336.master.cm.cluster
+This jobs runs on the following machines: echo node32-038
+BayesTraits V3.0 (Mar  2 2018)
+Mark Pagel and Andrew Meade
+www.evolution.reading.ac.uk
+
+
+Could not open file /newhome/sp16194/kinspace/code/data/bayestraits-input/siblings_ie.bttrees for reading

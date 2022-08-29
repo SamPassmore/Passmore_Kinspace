@@ -1,0 +1,39 @@
+Options:
+Model:                           MultiState
+Tree File Name:                  ./sim.trait.bttrees
+Data File Name:                  ./sim.trait.btdata
+Log File Name:                   ./sim-output.Log.txt
+Save Initial Trees:              False
+Save Trees:                      False
+Summary:                         False
+Seed:                            3500521311
+Precision:                       64 bits
+Cores:                           1
+Analysis Type:                   MCMC
+Sample Period:                   5000
+Iterations:                      100000
+Burn in:                         10000
+MCMC ML Start:                   False
+Use RJ MCMC:                     True
+Schedule File:                   ./sim-output.Schedule.txt
+Rate Dev:                        AutoTune
+No of Rates:                     2
+Base frequency (PI's):           None
+Character Symbols:               A,B
+Using a covarion model:          False
+Normalise Q Matrix:              True
+Scale Tree:                      0.188249
+Restrictions:
+    qAB                          RJ MCMC
+    qBA                          RJ MCMC
+Prior Information:
+    Prior Categories:            100
+    Priors
+        GlobalRate - uniform 0.00 100.00 
+        RJRates - exp 10.00 
+Tree Information
+     Trees:                      1
+     Taxa:                       60
+     Sites:                      1
+     States:                     2
+Iteration	Lh	Tree No	Global Rate	No Off Parmeters	No Off Zero	Model string	qAB	qBA	Root P(A)	Root P(B)	

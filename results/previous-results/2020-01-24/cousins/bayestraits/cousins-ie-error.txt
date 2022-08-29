@@ -1,0 +1,3 @@
+basename: missing operand
+Try `basename --help' for more information.
+Could not open file /newhome/sp16194/kinspace/code/data/bayestraits-input/cousins_ie.bttrees for reading

@@ -1,0 +1,30 @@
+Distinguish_Age 1 @-2.784,-5.360
+Distinguish_Gender 1 @-2.959,-4.314
+Distinguish_Generation 1 @-2.980,-3.046
+G%2B1 1 @1.169,-3.283
+G%2B2 1 @1.116,-4.792
+G-1 1 @1.252,0.153
+G0 1 @1.449,-1.928
+Informativeness U @-1.187,-2.716
+Kinship_Terminology O @3.259,-2.491
+Language_pressures U @-0.338,-2.058
+Simplicity U @-1.176,-1.421
+cognitive_pressure 1 @-1.249,-0.527
+cousins 1 @1.049,-2.427
+primitive_traits 1 @-3.924,-3.835
+siblings 1 @0.994,-1.493
+
+Distinguish_Age Informativeness
+Distinguish_Gender Informativeness
+Distinguish_Generation Informativeness
+G%2B1 Kinship_Terminology
+G%2B2 Kinship_Terminology
+G-1 Kinship_Terminology
+G0 Kinship_Terminology
+Informativeness Language_pressures
+Language_pressures G%2B1 G%2B2 G-1 G0 cousins siblings
+Simplicity Language_pressures
+cognitive_pressure Simplicity
+cousins G0
+primitive_traits Distinguish_Gender Distinguish_Generation
+siblings G0

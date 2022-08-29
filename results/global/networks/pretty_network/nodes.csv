@@ -1,0 +1,16 @@
+node,weight
+0 mX fX m// f//,16
+1 (eB yB eZ yZ),5
+2 eB eZ yB yZ,35
+3 eB yB (eZ yZ),12
+4 (eB yB) (eZ yZ),17
+5 (eB yB) eZ yZ,16
+6 eB eZ (yB yZ),16
+7 fX mX fe// fy// me// fy//,12
+8 e// y//  mX fX,18
+9 (eB eZ) yB yZ,16
+10 (eB eZ)(yB yZ),18
+11 // mX fX,14
+12 X //,15
+13 X e// y//,10
+14 X  m// f//,8

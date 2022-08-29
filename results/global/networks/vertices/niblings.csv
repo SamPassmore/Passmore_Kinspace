@@ -1,0 +1,32 @@
+"from","to"
+"-1 X //","4 X m// f//"
+"-1 X //","5 // mX fX"
+"1 (S BS ZS)(D ZD BD)","0 (S BS)(D ZD BD) mZS fZS"
+"1 (S BS ZS)(D ZD BD)","13 (S D)(BS ZS BD ZD)"
+"1 (S BS ZS)(D ZD BD)","14 S D (BS ZS)(BD ZD)"
+"1 (S BS ZS)(D ZD BD)","2 S D BS BD ZS ZD"
+"1 (S BS ZS)(D ZD BD)","6 (S BS ZS)(ZD BD) D"
+"11 (S D BS BD) (ZS ZD)","9 S D (BS BD)(ZS ZD)"
+"12 S D (BS ZS BD ZD)","14 S D (BS ZS)(BD ZD)"
+"13 (S D)(BS ZS BD ZD)","12 S D (BS ZS BD ZD)"
+"13 (S D)(BS ZS BD ZD)","15 (S D)(BS ZS)(BD ZD)"
+"13 (S D)(BS ZS BD ZD)","9 S D (BS BD)(ZS ZD)"
+"14 S D (BS ZS)(BD ZD)","2 S D BS BD ZS ZD"
+"15 (S D)(BS ZS)(BD ZD)","14 S D (BS ZS)(BD ZD)"
+"15 (S D)(BS ZS)(BD ZD)","2 S D BS BD ZS ZD"
+"3 (S BS)(D BD)(ZD ZS)","9 S D (BS BD)(ZS ZD)"
+"6 (S BS ZS)(ZD BD) D","14 S D (BS ZS)(BD ZD)"
+"7 (S BS BD ZS ZD)","-1 X //"
+"7 (S BS BD ZS ZD)","1 (S BS ZS)(D ZD BD)"
+"7 (S BS BD ZS ZD)","10 (S BS BD fZS fZD)(mZS mZD)"
+"7 (S BS BD ZS ZD)","11 (S D BS BD) (ZS ZD)"
+"7 (S BS BD ZS ZD)","13 (S D)(BS ZS BD ZD)"
+"7 (S BS BD ZS ZD)","3 (S BS)(D BD)(ZD ZS)"
+"7 (S BS BD ZS ZD)","8 (S BS BD)(D ZS ZD)"
+"8 (S BS BD)(D ZS ZD)","9 S D (BS BD)(ZS ZD)"
+"9 S D (BS BD)(ZS ZD)","2 S D BS BD ZS ZD"
+"4 X m// f//",NA
+"5 // mX fX",NA
+"0 (S BS)(D ZD BD) mZS fZS",NA
+"2 S D BS BD ZS ZD",NA
+"10 (S BS BD fZS fZD)(mZS mZD)",NA

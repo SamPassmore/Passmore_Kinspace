@@ -1,0 +1,9 @@
+"from","to"
+"1 (FF MF) FM MM","0 FF MF FM MM"
+"2 (FF MF)(FM MM)","0 FF MF FM MM"
+"2 (FF MF)(FM MM)","1 (FF MF) FM MM"
+"2 (FF MF)(FM MM)","3 FF MF (FM MM)"
+"3 FF MF (FM MM)","0 FF MF FM MM"
+"4 (FF MM) MF FM","0 FF MF FM MM"
+"5 (FF MF FM MM)","2 (FF MF)(FM MM)"
+"0 FF MF FM MM",NA
