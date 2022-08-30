@@ -1,14 +1,16 @@
 # /usr/bin/Rscript
 
-suppressMessages(library(readxl))
-suppressMessages(library(dplyr))
-suppressMessages(library(ggdag))
-suppressMessages(library(ggplot2))
-suppressMessages(library(igraph))
-suppressMessages(library(vegan))
-suppressMessages(library(tidyr))
-suppressMessages(library(boot))
-suppressMessages(library(Rmisc))
+suppressPackageStartupMessages({
+  library(readxl)
+  library(dplyr)
+  library(ggdag)
+  library(ggplot2)
+  library(igraph)
+  library(vegan)
+  library(tidyr)
+  library(boot)
+  library(Rmisc)
+})
 
 seed = 567987
 
@@ -23,10 +25,10 @@ args = commandArgs(trailingOnly = TRUE)
 type = args[1]
 
 dg = suppressMessages(read_xlsx(
-  paste0('results/type-descriptions/', type, '.xlsx'), 
+  paste0('data/type-descriptions/', type, '.xlsx'), 
          sheet = "dag", col_names = FALSE))
 
-glottolog = read.csv('raw/glottolog-cldf/cldf/languages.csv', stringsAsFactors = FALSE)
+glottolog = read.csv('https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/languages.csv', stringsAsFactors = FALSE)
 
 cluster = read.csv(
   paste0('results/hdbscan/', type, '.csv'), 
@@ -35,7 +37,7 @@ cluster = read.csv(
 
 new_labels = suppressMessages(
   read_xlsx(
-  paste0('results/type-descriptions/', type, '.xlsx'), sheet = 1, .name_repair = "universal") %>% 
+  paste0('data/type-descriptions/', type, '.xlsx'), sheet = 1, .name_repair = "universal") %>% 
   select(Label, Coded.Description) %>% 
   filter(Label > -1)
 )
@@ -46,8 +48,8 @@ new_labels = suppressMessages(
 # edges = data.frame(from = dag$data$name, to = dag$data$to, stringsAsFactors = FALSE)
 
 ## weighted network
-edges = read_xlsx(
-  paste0('results/global/networks/vertices/', type, '.xlsx')
+edges = read.csv(
+  paste0('results/global/networks/vertices/', type, '.csv')
 )
 
 edge_weights = read.csv('results/global/networks/edge_weights/change.csv', stringsAsFactors = FALSE) %>%

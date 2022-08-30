@@ -12,8 +12,9 @@ help:
 	@echo 3. make matrix
 	@echo 4. make cluster
 	@echo Then manually determine clusters
-	@echo 5. make global
-	@echo 6. make bayestraits
+	@echo 5. make umap will plot the results colored by cluster and EA categorisation
+	@echo 6. make global
+	@echo 7. make bayestraits
 	@echo Then run models on bluecrystal
 	
 
@@ -44,6 +45,7 @@ cluster:
 	python3 -m venv myvenv
 	myvenv/bin/pip3 install -r requirements.txt 
 	myvenv/bin/python3 analysis/hdbscan-cluster.py
+	RScript analysis/cluster_tolanguages.R
 	
 # manually determine clusters & their DAGs
 # DAGs are directed by the addition of a term (although direction is not indiciative of change likelihood)
@@ -55,11 +57,9 @@ umap:
 	RScript analysis/plot-umap.R g1
 	RScript analysis/plot-umap.R g2
 
-
 # Create global level frequency graphs 
-global: $(GLOTTOLOG)
+global:
 	@echo "Create global frequency graphs"
-	cd $(GLOTTOLOG) && git pull
 	mkdir -p results/global/data
 	mkdir -p results/global/networks
 	mkdir -p results/global/networks/vertices
@@ -72,15 +72,6 @@ global: $(GLOTTOLOG)
 	RScript analysis/global-frequency.R g1
 	RScript analysis/global-frequency.R g2
 	
-# this takes ages
-mantel:
-	#RScript analysis/global-space.R siblings
-	#RScript analysis/global-space.R niblings
-	#RScript analysis/global-space.R g0
-	RScript analysis/global-space.R g1
-	RScript analysis/global-space.R g2
-	#RScript analysis/global-model.R
-	@echo "Done..." $@
 
 # Create Bayestraits data
 bayestraits: $(DPLACE)
