@@ -52,11 +52,11 @@ edges = read.csv(
   paste0('results/global/networks/vertices/', type, '.csv')
 )
 
-edge_weights = read.csv('results/global/networks/edge_weights/change.csv', stringsAsFactors = FALSE) %>%
+edge_weights = read.csv('data/weights/change.csv', stringsAsFactors = FALSE) %>%
   left_join(edges, "change")
-edge_weights = read.csv('results/global/networks/edge_weights/level.csv', stringsAsFactors = FALSE) %>%
+edge_weights = read.csv('data/weights/level.csv', stringsAsFactors = FALSE) %>%
   left_join(edge_weights, "level")
-edge_weights = read.csv('results/global/networks/edge_weights/type.csv', stringsAsFactors = FALSE) %>%
+edge_weights = read.csv('resultsdata/weights/type.csv', stringsAsFactors = FALSE) %>%
   left_join(edge_weights, "type")
 
 edge_weights$weight = edge_weights$type.value * edge_weights$level.value * edge_weights$change.value

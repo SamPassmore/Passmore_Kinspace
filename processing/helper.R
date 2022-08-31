@@ -63,3 +63,19 @@ cond_prob_BgvA = function(a, b){
 # a = c("a", "b", "c")
 # b = c(1, 2, 3)
 # cond_prob_BgvA(a, b)
+
+revert_vector = function(v, nmes){
+  require(igraph)
+  
+  n = length(v)
+  dims = 0.5 * (sqrt((8 * n) + 1) + 1)
+  mat = matrix(NA, ncol = dims, nrow = dims)
+  mat[lower.tri(mat)] = v
+  mat[upper.tri(mat)] <- t(mat)[upper.tri(mat)]
+  diag(mat) = 1
+  
+  dd = graph_from_adjacency_matrix(mat, mode = "undirected") %>% 
+    clusters() %>% {.$membership}
+  names(dd) = nmes
+  dd
+}
