@@ -48,10 +48,6 @@ colour_set = [ rgb2hex(i) for i in colour_set]
 
 
 # # Siblings
-# 
-
-# In[2]:
-
 
 ## read in the data
 ## these are within language distance matrices - not between language 
@@ -60,9 +56,6 @@ string_df = pd.read_csv(DIR+"data/matrix/siblings_matrix.csv") #
 string_mat = string_df[string_df.columns[:-1]]
 print(string_mat.shape)
 
- 
-
- 
 # possible distance metrics
 # ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev', 
 # 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric, 
@@ -94,10 +87,6 @@ settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
-
-# In[3]:
-
-
 print(int(ms))
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
@@ -116,10 +105,6 @@ cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
 cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
 cluster_count
 
-
-# In[4]:
-
-
 # organise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
 output['Glottocode'] = string_df.Glottocode
@@ -131,10 +116,6 @@ output['cluster_prob'] = clusterer.probabilities_.tolist()
 indices = output.label_ != -1 
 output = output[indices]
 strmat_subset = string_mat[indices]
-
-
-# In[5]:
-
 
 x_train, x_test, y_train, y_test = train_test_split(strmat_subset, output['label_'], test_size=0.25, random_state=1) # 75% training and 25% test
 
@@ -149,7 +130,6 @@ clf = clf.fit(x_train,y_train)
 y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
 
 ## random forest 
 forest = ExtraTreesClassifier(n_estimators=1000,
@@ -178,64 +158,6 @@ print("Feature ranking:")
 for f in range(0, len(string_mat.columns)):
     print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
 
-
-# In[7]:
-
-
-# most_important = feature_importance.importance >= 0.03516
-
-# FI_mat = string_mat.iloc[:,feature_importance.feature[most_important]]
-# print(FI_mat.shape)
-
-# settings = []
-# for x in range(3, 12):
-#     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-#         approx_min_span_tree=True,
-#         gen_min_span_tree=True,
-#         leaf_size=100,
-#         metric=metric,
-#         min_cluster_size=mcs, # smallest size a cluster can be
-#         min_samples=x, # how conservative should clustering be (larger = more conservative)
-#                         # 7 gives the lowest number of outliers.
-#         p=None, 
-#         cluster_selection_method='eom')
-#     clusterer.fit(FI_mat)
-#     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
-#     cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
-#     print(x, cluster_count.iloc[0,1])
-#     settings.append([x, cluster_count.iloc[0,1]])
-
-# settings = pd.DataFrame(settings)
-# settings.columns = ['value', 'outliers']
-# settings = settings.loc[settings['outliers'].idxmin()]
-# ms = int(settings['value'])
-
-
-# In[8]:
-
-
-# print(ms)
-
-# clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-#     approx_min_span_tree=True,
-#     gen_min_span_tree=True,
-#     leaf_size=100,
-#     metric=metric,
-#     min_cluster_size=mcs, # smallest size a cluster can be
-#     min_samples=ms, # how conservative should clustering be (larger = more conservative) 
-#     p=None, 
-#     cluster_selection_method='eom')
-# clusterer.fit(FI_mat)
-
-# #clusterer.single_linkage_tree_.plot(cmap='viridis', colorbar=True)
-# cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
-# cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
-# cluster_count
-
-
-# In[6]:
-
-
 # reorganise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
 output['Glottocode'] = string_df.Glottocode
@@ -248,7 +170,6 @@ output.to_csv(DIR+'results/hdbscan/siblings.csv')
 # remove uncategorised langauges from the decision tree
 indices = output.label_ != -1 
 output2 = output[indices]
-# FI_mat2 = FI_mat[indices]
 string_mat2 = string_mat[indices]
 
 x_train, x_test, y_train, y_test = train_test_split(string_mat2, output2['label_'], test_size=0.25, random_state=1) # 75% training and 25% test
@@ -282,10 +203,6 @@ graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 graph.write_pdf(DIR+"results/decision-trees/siblings.pdf") 
 
 #Image(graph.create_png())
-
-
-# In[35]:
-
 
 label = [clusterer.labels_]
 color_palette = sns.color_palette('Paired', 47)
@@ -321,13 +238,8 @@ ax.legend(handles=custom_scatter, loc='lower left', ncol = 3)
 
 np.savetxt(DIR+'results/umap/siblings_embeddings.csv', embedding, delimiter=",")
 
-#fig.savefig(DIR+'results/umap/siblings.pdf', format='pdf')
 
-
-# # G1
-
-# In[2]:
-
+#### G1 ####
 
 ## read in the data
 ## these are within language distance matrices - not between language 
@@ -367,10 +279,6 @@ settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
-
-# In[3]:
-
-
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
@@ -389,10 +297,6 @@ cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
 cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
 cluster_count
 
-
-# In[4]:
-
-
 # organise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
 output['Glottocode'] = string_df.Glottocode
@@ -404,10 +308,6 @@ output['cluster_prob'] = clusterer.probabilities_.tolist()
 indices = output.label_ != -1 
 output = output[indices]
 strmat_subset = string_mat[indices]
-
-
-# In[5]:
-
 
 x_train, x_test, y_train, y_test = train_test_split(strmat_subset, output['label_'], test_size=0.25, random_state=1) # 75% training and 25% test
 
@@ -422,7 +322,6 @@ clf = clf.fit(x_train,y_train)
 y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
 
 ## random forest 
 forest = ExtraTreesClassifier(n_estimators=1000,
@@ -450,12 +349,6 @@ plt.xlim([-1, string_mat.shape[1]])
 print("Feature ranking:")
 for f in range(0, len(string_mat.columns)):
     print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
-
-
-# So we have identified some key features from the initial cluster analysis that organise our space. Here we re-cluster the data using only these important features to determine how stable the space is, or is clustering on some noise
-
-# In[6]:
-
 
 most_important = feature_importance.importance >= 0.02019
 
@@ -485,10 +378,6 @@ settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
-
-# In[7]:
-
-
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     approx_min_span_tree=True,
     gen_min_span_tree=True,
@@ -504,10 +393,6 @@ clusterer.fit(FI_mat)
 cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
 cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
 cluster_count
-
-
-# In[8]:
-
 
 # reorganise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
@@ -537,10 +422,6 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## plot tree
-# import graphviz
-# from sklearn.tree import export_graphviz
-
 # graphviz.Source(export_graphviz(clf))
 max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
@@ -554,10 +435,6 @@ graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 graph.write_pdf(DIR+"results/decision-trees/g1.pdf") 
 
 #Image(graph.create_png())
-
-
-# In[9]:
-
 
 label = [clusterer.labels_]
 color_palette = sns.color_palette('Paired', 47)
@@ -587,26 +464,8 @@ embedding = reducer.fit_transform(string_mat)
 
 np.savetxt(DIR+'results/umap/g1_embeddings.csv', embedding, delimiter=",")
 
-# fig, ax = plt.subplots()
-# ax.scatter(x = embedding[:,0], y = embedding[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-# ax.legend(handles=custom_scatter, loc='lower right', ncol = 3)
-# #plt.show()
 
-# fig.savefig(DIR+'results/umap/g1.pdf', format='pdf')
-
-# X_embedded = TSNE(n_components=2).fit_transform(string_mat)
-
-# fig, ax = plt.subplots()
-# ax.scatter(x = X_embedded[:,0], y = X_embedded[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-# #plt.show()
-
-# fig.savefig(DIR+'results/tsne/g1.pdf', format='pdf')
-
-
-# # G0
-
-# In[2]:
-
+#### G0 ####
 
 ## read in the data
 ## these are within language distance matrices - not between language 
@@ -646,10 +505,6 @@ settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
-
-# In[3]:
-
-
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
@@ -668,10 +523,6 @@ cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
 cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
 cluster_count
 
-
-# In[4]:
-
-
 # organise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
 output['Glottocode'] = string_df.Glottocode
@@ -683,10 +534,6 @@ output['cluster_prob'] = clusterer.probabilities_.tolist()
 indices = output.label_ != -1 
 output = output[indices]
 strmat_subset = string_mat[indices]
-
-
-# In[5]:
-
 
 x_train, x_test, y_train, y_test = train_test_split(strmat_subset, output['label_'], test_size=0.25, random_state=1) # 75% training and 25% test
 
@@ -701,7 +548,6 @@ clf = clf.fit(x_train,y_train)
 y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
 
 ## random forest 
 forest = ExtraTreesClassifier(n_estimators=1000,
@@ -729,12 +575,6 @@ plt.xlim([-1, string_mat.shape[1]])
 print("Feature ranking:")
 for f in range(0, len(string_mat.columns)):
     print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
-
-
-# So we have identified some key features from the initial cluster analysis that organise our space. Here we re-cluster the data using only these important features to determine how stable the space is, or is clustering on some noise
-
-# In[7]:
-
 
 most_important = feature_importance.importance >= 0.00196
 
@@ -764,10 +604,6 @@ settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
-
-# In[8]:
-
-
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
@@ -785,10 +621,6 @@ clusterer.fit(FI_mat)
 cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
 cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
 cluster_count
-
-
-# In[11]:
-
 
 # reorganise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
@@ -818,10 +650,6 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## plot tree
-# import graphviz
-# from sklearn.tree import export_graphviz
-
 # graphviz.Source(export_graphviz(clf))
 max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
@@ -835,10 +663,6 @@ graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 graph.write_pdf(DIR+"results/decision-trees/g0.pdf") 
 
 #Image(graph.create_png())
-
-
-# In[12]:
-
 
 label = [clusterer.labels_]
 color_palette = sns.color_palette('Paired', 47)
@@ -874,24 +698,11 @@ ax.scatter(x = jittered_x, y = jittered_y, s=50, linewidth=0, c=cluster_colors, 
 ax.legend(handles=custom_scatter, loc='lower right', ncol = 3)
 plt.show()
 
-#fig.savefig(DIR+'results/umap/g0.pdf', format='pdf')
-
 # save embeddings
 np.savetxt(DIR+'results/umap/g0_embeddings.csv', embedding, delimiter=",")
 
-# X_embedded = TSNE(n_components=2).fit_transform(string_mat)
 
-# fig, ax = plt.subplots()
-# ax.scatter(x = X_embedded[:,0], y = X_embedded[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-# #plt.show()
-
-# fig.savefig(DIR+'results/tsne/g0.pdf', format='pdf')
-
-
-# # G+2
-
-# In[13]:
-
+#### G+2 ####
 
 ## read in the data
 ## these are within language distance matrices - not between language 
@@ -931,10 +742,6 @@ settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
-
-# In[14]:
-
-
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
@@ -953,10 +760,6 @@ cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
 cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
 cluster_count
 
-
-# In[15]:
-
-
 # organise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
 output['Glottocode'] = string_df.Glottocode
@@ -968,10 +771,6 @@ output['cluster_prob'] = clusterer.probabilities_.tolist()
 indices = output.label_ != -1 
 output = output[indices]
 strmat_subset = string_mat[indices]
-
-
-# In[16]:
-
 
 x_train, x_test, y_train, y_test = train_test_split(strmat_subset, output['label_'], test_size=0.25, random_state=1) # 75% training and 25% test
 
@@ -986,7 +785,6 @@ clf = clf.fit(x_train,y_train)
 y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
 
 ## random forest 
 forest = ExtraTreesClassifier(n_estimators=1000,
@@ -1014,12 +812,6 @@ plt.xlim([-1, string_mat.shape[1]])
 print("Feature ranking:")
 for f in range(0, len(string_mat.columns)):
     print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
-
-
-# So we have identified some key features from the initial cluster analysis that organise our space. Here we re-cluster the data using only these important features to determine how stable the space is, or is clustering on some noise
-
-# In[17]:
-
 
 # reorganise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
@@ -1049,10 +841,6 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## plot tree
-# import graphviz
-# from sklearn.tree import export_graphviz
-
 # graphviz.Source(export_graphviz(clf))
 max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
@@ -1064,12 +852,6 @@ export_graphviz(clf, out_file=dot_data,
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
 
 graph.write_pdf(DIR+"results/decision-trees/g2.pdf") 
-
-##Image(graph.create_png())
-
-
-# In[18]:
-
 
 label = [clusterer.labels_]
 color_palette = sns.color_palette('Paired', 47)
@@ -1099,26 +881,7 @@ embedding = reducer.fit_transform(string_mat)
 
 np.savetxt(DIR+'results/umap/g2_embeddings.csv', embedding, delimiter=",")
 
-# fig, ax = plt.subplots()
-# ax.scatter(x = embedding[:,0], y = embedding[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-# ax.legend(handles=custom_scatter, loc='upper left', ncol = 3)
-# ##plt.show()
-
-# fig.savefig(DIR+'results/umap/g2.pdf', format='pdf')
-
-# X_embedded = TSNE(n_components=2).fit_transform(string_mat)
-
-# fig, ax = plt.subplots()
-# ax.scatter(x = X_embedded[:,0], y = X_embedded[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-# #plt.show()
-
-# fig.savefig(DIR+'results/tsne/g2.pdf', format='pdf')
-
-
-# # G-2
-
-# In[2]:
-
+#### G-2 ####
 
 ## read in the data
 ## these are within language distance matrices - not between language 
@@ -1158,10 +921,6 @@ settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
-
-# In[3]:
-
-
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
@@ -1180,10 +939,6 @@ cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
 cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
 cluster_count
 
-
-# In[4]:
-
-
 # organise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
 output['Glottocode'] = string_df.Glottocode
@@ -1195,10 +950,6 @@ output['cluster_prob'] = clusterer.probabilities_.tolist()
 indices = output.label_ != -1 
 output = output[indices]
 strmat_subset = string_mat[indices]
-
-
-# In[5]:
-
 
 x_train, x_test, y_train, y_test = train_test_split(strmat_subset, output['label_'], test_size=0.20, random_state=1) # 75% training and 25% test
 
@@ -1213,7 +964,6 @@ clf = clf.fit(x_train,y_train)
 y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
 
 ## random forest 
 forest = ExtraTreesClassifier(n_estimators=1000,
@@ -1241,10 +991,6 @@ plt.xlim([-1, string_mat.shape[1]])
 print("Feature ranking:")
 for f in range(0, len(string_mat.columns)):
     print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
-
-
-# In[6]:
-
 
 most_important = feature_importance.importance >= 0.004029
 
@@ -1274,10 +1020,6 @@ settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
-
-# In[7]:
-
-
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
@@ -1295,12 +1037,6 @@ clusterer.fit(FI_mat)
 cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
 cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
 cluster_count
-
-
-# So we have identified some key features from the initial cluster analysis that organise our space. Here we re-cluster the data using only these important features to determine how stable the space is, or is clustering on some noise
-
-# In[8]:
-
 
 # reorganise cluster output
 output = pd.DataFrame(columns=['Glottocode','label_'])
@@ -1330,10 +1066,6 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## plot tree
-# import graphviz
-# from sklearn.tree import export_graphviz
-
 # graphviz.Source(export_graphviz(clf))
 max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
@@ -1347,10 +1079,6 @@ graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 graph.write_pdf(DIR+"results/decision-trees/niblings.pdf") 
 
 #Image(graph.create_png())
-
-
-# In[9]:
-
 
 label = [clusterer.labels_]
 color_palette = sns.color_palette('Paired', 47)
@@ -1380,23 +1108,6 @@ embedding = reducer.fit_transform(string_mat)
 
 np.savetxt(DIR+'results/umap/niblings_embeddings.csv', embedding, delimiter=",")
 
-# fig, ax = plt.subplots()
-# ax.scatter(x = embedding[:,0], y = embedding[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-# ax.legend(handles=custom_scatter, loc='upper right', ncol = 3)
-# #plt.show()
-
-# fig.savefig(DIR+'results/umap/niblings.pdf', format='pdf')
-
-# X_embedded = TSNE(n_components=2).fit_transform(string_mat)
-
-# fig, ax = plt.subplots()
-# ax.scatter(x = X_embedded[:,0], y = X_embedded[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-# #plt.show()
-
-# fig.savefig(DIR+'results/tsne/niblings.pdf', format='pdf')
-
-
-# In[ ]:
 
 
 

@@ -64,7 +64,7 @@ idx = cluster_joined$nr_type != 'none'
 pdfCluster::adj.rand.index(cluster_joined$label_[idx], cluster_joined$nr_type[idx])
 
 ## qualitative review of languages
-terms = read.csv('data/terms/sibling_terms.csv', stringsAsFactors = FALSE)
+terms = read.csv('data/terms/siblings_terms.csv', stringsAsFactors = FALSE)
 terms_j = dplyr::left_join(terms, cluster_joined, "Glottocode")
 
 test = terms_j %>% 

@@ -106,7 +106,7 @@ cat("G+2: \n Sex of Speaker:", round(sos_g2[[2]], 2),
 
 
 ## G-1 [niblings and children]
-niblings = read.csv('data/terms/nibling_terms.csv', stringsAsFactors = FALSE)
+niblings = read.csv('data/terms/niblings_terms.csv', stringsAsFactors = FALSE)
 sos_nib = sexofspeaker(niblings) # occurs in 13% of languages so we will keep these - 18% overall
 nibling_matrix = apply(niblings %>% select(-Glottocode), 1, get_vector, method = method) %>% t() %>% as.data.frame()
 nibling_matrix$Glottocode = niblings$Glottocode
