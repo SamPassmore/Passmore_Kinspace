@@ -65,10 +65,12 @@ for(c in cluster_sets){
     colnames(df) = c("Cluster", "Count", used_kin_categories)
     
   }
-  
   modal_types[[c]] = df
 }
 
-
+filenames = paste0("results/modaltype_",
+                   names(modal_types),
+                   ".csv")
+purrr::map2(modal_types, filenames, function(x, y) write.csv(x, y, row.names = FALSE))
 
 

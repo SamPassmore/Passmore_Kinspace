@@ -23,76 +23,65 @@ args = commandArgs(trailingOnly = TRUE)
 
 # args
 type = args[1]
-
-dg = suppressMessages(read_xlsx(
-  paste0('data/type-descriptions/', type, '.xlsx'), 
-         sheet = "dag", col_names = FALSE))
+type = "niblings"
 
 glottolog = read.csv('https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/languages.csv', stringsAsFactors = FALSE)
 
-cluster = read.csv(
-  paste0('results/hdbscan/', type, '.csv'), 
-  stringsAsFactors = FALSE) %>% 
+descriptions = suppressMessages(
+  read_xlsx("data/typology.xlsx", sheet = type, .name_repair = "universal")
+)
+
+cluster = read.csv('results/kinbank_wclusters.csv') %>% 
   dplyr::left_join(., glottolog, "Glottocode")
 
-new_labels = suppressMessages(
-  read_xlsx(
-  paste0('data/type-descriptions/', type, '.xlsx'), sheet = 1, .name_repair = "universal") %>% 
-  select(Label, Coded.Description) %>% 
-  filter(Label > -1)
-)
-
-
-# read in DAG
-# dag = tidy_dagitty(unlist(dg[2]))
-# edges = data.frame(from = dag$data$name, to = dag$data$to, stringsAsFactors = FALSE)
+cluster = cluster[!is.na(cluster[,type]),]
+cluster$label_ = cluster[,type]
 
 ## weighted network
-edges = read.csv(
-  paste0('results/global/networks/vertices/', type, '.csv')
-)
+edges = read_xlsx('data/edges.xlsx', sheet = type, na = "NA")
+# remove edges that were deemed to not exist
+edges = edges[!is.na(edges$rule),]
+
+# rename nodes with given letters
+edges$to = stringr::str_extract(edges$to, "^[A-Z]{1}")
+edges$from = stringr::str_extract(edges$from, "^[A-Z]{1}")
+
+# Print nodes that do not have any edges
+unconnected_edges_idx = !cluster$label_ %in% c(edges$to, edges$from)
+unconnected_edges = unique(cluster$label_[unconnected_edges_idx])
+
+cat("Unconnected Nodes:")
+cat(paste(
+  descriptions$Node.Name[descriptions$Cluster %in% unconnected_edges], collapse = " \n"
+))
 
 edge_weights = read.csv('data/weights/change.csv', stringsAsFactors = FALSE) %>%
-  left_join(edges, "change")
+  left_join(edges, ., "change")
 edge_weights = read.csv('data/weights/level.csv', stringsAsFactors = FALSE) %>%
-  left_join(edge_weights, "level")
-edge_weights = read.csv('resultsdata/weights/type.csv', stringsAsFactors = FALSE) %>%
-  left_join(edge_weights, "type")
+  left_join(edge_weights, ., "level")
+edge_weights = read.csv('data/weights/type.csv', stringsAsFactors = FALSE) %>%
+  left_join(edge_weights, ., "type")
 
 edge_weights$weight = edge_weights$type.value * edge_weights$level.value * edge_weights$change.value
 
-
-# save vertices
-# write.csv(edges, 
-#           paste0('results/global/networks/vertices/', type, ".csv")
-#           )
-
 edges = data.frame(to = edge_weights$to, from = edge_weights$from, weight = edge_weights$weight)
-edges = node_values(edges)
+
 # find isolated nodes
 no_outs = edges[is.na(edges$to),]
 isolated = no_outs[!(no_outs$from %in% edges$to),'from']
-# connected nodes
-edges = edges[!is.na(edges$to),]
+
 # create igraph format of DAG
 simple_igraph = graph.data.frame(edges)
 #simple_igraph = igraph::graph_from_edgelist(as.matrix(edges))
 simple_igraph = add_vertices(simple_igraph, length(isolated), name=isolated)
-# pdf(
-#   paste0('results/global/networks/', type, '.pdf')
-# )
-# plot(simple_igraph) # check it was read correctly
-# dev.off()
-
 
 # Determine the centrality of types in the network
 # centrality in the total network
-centrality_degree = igraph::degree(simple_igraph, mode = "total")
+centrality = igraph::degree(simple_igraph, mode = "total")
 #centrality_eigen = igraph::eigen_centrality(simple_igraph)$vector
 #centrality_pr = igraph::page.rank(simple_igraph)$vector
 #centrality_close = igraph::closeness(simple_igraph)
-centrality = centrality_degree
-centrality_df = data.frame(label_ = names(centrality), freq = (centrality))
+centrality_df = data.frame(label_ = names(centrality), connections = (centrality))
 
 centrality_strength = igraph::strength(simple_igraph, mode = "total")
 centrality_strength = data.frame(label_ = names(centrality_strength), strength = (centrality_strength))
@@ -210,7 +199,7 @@ centrality_raw = data.frame(label_ = as.factor(names(centrality)), centrality = 
                             strength = centrality_df$strength)
 
 sr = get_diversity(cluster_subset, TRUE)
-simpson_raw = data.frame(label_ = as.factor(rownames(sr)), diversity = sr)
+simpson_raw = data.frame(label_ = as.factor(rownames(sr)), diversity = round(sr, 2))
 
 frequency_raw = as.data.frame(table(cluster$label_))
 colnames(frequency_raw) = c("label_", "frequency")

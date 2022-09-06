@@ -31,8 +31,11 @@ from sklearn.ensemble import ExtraTreesClassifier
 # colours
 from matplotlib.colors import rgb2hex
 
+import random
 # description of distance metrics here:
-# https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html
+# https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html
+
+random.seed(10)
 
 plot_kwds = {'alpha' : 0.5, 's' : 80, 'linewidths':0}
 

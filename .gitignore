@@ -8,3 +8,5 @@ results/
 .RData
 .Ruserdata
 
+# Excel temporary
+~$*.xls*

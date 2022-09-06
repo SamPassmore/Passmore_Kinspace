@@ -46,6 +46,8 @@ cluster:
 	myvenv/bin/pip3 install -r requirements.txt 
 	myvenv/bin/python3 analysis/hdbscan-cluster.py
 	RScript analysis/cluster_tolanguages.R
+	RScript analysis/modal_types.R
+	
 	
 # manually determine clusters & their DAGs
 # DAGs are directed by the addition of a term (although direction is not indiciative of change likelihood)
