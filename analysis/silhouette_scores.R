@@ -1,8 +1,10 @@
 # silhouettes
 
-library(dplyr)
-library(cluster)
-library(proxy)
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(cluster)
+  library(proxy)
+})
 
 
 kintype = c("g0", "g1", "g2", "siblings", "niblings")

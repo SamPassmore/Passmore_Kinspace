@@ -44,14 +44,14 @@ cluster:
 	mkdir -p results/hdbscan
 	python3 -m venv myvenv
 	myvenv/bin/pip3 install -r requirements.txt 
-	myvenv/bin/python3 analysis/hdbscan-cluster.py
-	RScript analysis/cluster_tolanguages.R
-	RScript analysis/modal_types.R
-	
+	myvenv/bin/python3 analysis/hdbscan-cluster.py # Cluster languages
+	RScript analysis/cluster_tolanguages.R # Build summary file
+	RScript analysis/modal_types.R # Identify the most common structure within each cluster
 	
 # manually determine clusters & their DAGs
 # DAGs are directed by the addition of a term (although direction is not indiciative of change likelihood)
 
+# Create kinspace projections
 umap: 
 	RScript analysis/plot-umap.R siblings
 	RScript analysis/plot-umap.R niblings
@@ -65,9 +65,9 @@ global:
 	mkdir -p results/global/data
 	mkdir -p results/global/networks
 	mkdir -p results/global/networks/vertices
-	mkdir -p results/global/graphs
+	mkdir -p results/hdbscan/silhouette/
 	mkdir -p results/global/mantel
-	RScript analysis/get_dagedgelist.R
+	RScript analysis/silhouette_scores.R
 	RScript analysis/global-frequency.R siblings
 	RScript analysis/global-frequency.R niblings
 	RScript analysis/global-frequency.R g0
