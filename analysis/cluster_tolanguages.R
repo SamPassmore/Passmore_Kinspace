@@ -1,6 +1,10 @@
 ## Cluster formatting
-library(dplyr)
-library(tidyr)
+
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(tidyr)
+  library(assertthat)
+})
 
 to_letters = function(df){
   x = df$label_
@@ -19,7 +23,7 @@ to_letters = function(df){
   dplyr::left_join(df, out, c("label_" = "x"))
 }
 
-cluster_files = list.files('results/hdbscan/', full.names = TRUE)
+cluster_files = list.files('results/hdbscan/', full.names = TRUE, recursive = FALSE, pattern = "*.csv")
 clusters = lapply(cluster_files, read.csv)
 names(clusters) = basename(cluster_files) %>% 
   tools::file_path_sans_ext()
@@ -33,9 +37,14 @@ clusters_wide = pivot_wider(data = clusters[,c("subset", "Glottocode", "letter_l
                             values_from = letter_labels
                             )
 
-languages = read.csv('kinbank/kinbank/cldf/languages.csv')
+x = assert_that(n_distinct(clusters_wide$Glottocode) == nrow(clusters_wide))
+
+languages = read.csv('kinbank/kinbank/cldf/languages.csv') %>% 
+  group_by(Glottocode) %>% 
+  slice_head(n = 1)
+
+x = assert_that(n_distinct(languages$Glottocode) == nrow(languages))
 
 language_clusters = left_join(languages, clusters_wide, by = "Glottocode")
-
 
 write.csv(language_clusters, 'results/kinbank_wclusters.csv')

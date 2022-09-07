@@ -110,6 +110,12 @@ out = dplyr::left_join(simpson_raw, frequency_raw, by = "label_") %>%
 
 out$type = type
 
+# Merge silhouette scores
+silhouette = read.csv(
+  paste0("results/hdbscan/silhouette/g0_all.csv",)
+)
+
+
 write.csv(out[,c("label_", "frequency", "diversity", "centrality", "strength", "type")], 
           file = 
             paste0('results/global/data/',
