@@ -1,7 +1,9 @@
 # modal type
-library(plyr)
-library(dplyr)
-library(stringr)
+suppressPackageStartupMessages({
+  library(plyr)
+  library(dplyr)
+  library(stringr)
+})
 source('processing/helper.R')
 
 kinspace_results = read.csv('results/kinbank_wclusters.csv')
@@ -10,16 +12,16 @@ cluster_sets = c("g0", "g1", "g2", "niblings", "siblings")
 
 modal_types = vector(mode = "list", length = length(cluster_sets))
 names(modal_types) = cluster_sets
-for(c in cluster_sets){
+for(cs in cluster_sets){
   
-  clusters = kinspace_results[,c]
+  clusters = kinspace_results[,cs]
   cluster_types = sort(unique(clusters[!is.na(clusters)]))
   
   matrix = read.csv(
-    paste0("data/matrix/", c,"_matrix.csv")
+    paste0("data/matrix/", cs,"_matrix.csv")
   )
   terms = read.csv(
-    paste0('data/terms/', c, '_terms.csv')
+    paste0('data/terms/', cs, '_terms.csv')
   )
   
   kin_categories = colnames(terms)[-ncol(terms)]
@@ -37,7 +39,7 @@ for(c in cluster_sets){
     c_t = cluster_types[i]
     langs = 
       kinspace_results %>% 
-      filter(get(c) == c_t) %>% 
+      filter(get(cs) == c_t) %>% 
       pull(Glottocode)  
     
     idx = matrix$Glottocode %in% langs

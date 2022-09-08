@@ -65,7 +65,7 @@ global:
 	mkdir -p results/global/data
 	mkdir -p results/global/networks
 	mkdir -p results/global/networks/vertices
-	mkdir -p results/hdbscan/silhouette/
+	mkdir -p results/global/silhouette/
 	mkdir -p results/global/mantel
 	RScript analysis/silhouette_scores.R
 	RScript analysis/global-frequency.R siblings

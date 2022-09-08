@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[33]:
-
-
 import numpy as np
 import pandas as pd 
 from hdbscan import HDBSCAN
@@ -21,9 +18,6 @@ from sklearn import metrics #Import scikit-learn metrics module for accuracy cal
 from six import StringIO  
 from IPython.display import Image  
 import pydotplus
-
-# tsne
-from sklearn.manifold import TSNE
 
 # random forest
 from sklearn.ensemble import ExtraTreesClassifier
@@ -168,7 +162,7 @@ output['label_'] = clusterer.labels_.tolist()
 output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
-output.to_csv(DIR+'results/hdbscan/siblings.csv')
+
 
 # remove uncategorised langauges from the decision tree
 indices = output.label_ != -1 
@@ -239,7 +233,10 @@ ax.scatter(x = embedding[:,0], y = embedding[:,1], s=50, linewidth=0, c=cluster_
 ax.legend(handles=custom_scatter, loc='lower left', ncol = 3)
 #plt.show()
 
-np.savetxt(DIR+'results/umap/siblings_embeddings.csv', embedding, delimiter=",")
+embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
+output = pd.concat([output, embeddings_df], axis=1)
+output.to_csv(DIR+'results/hdbscan/siblings.csv')
+
 
 
 #### G1 ####
@@ -404,8 +401,6 @@ output['label_'] = clusterer.labels_.tolist()
 output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
-output.to_csv(DIR+'results/hdbscan/g1.csv')
-
 # remove uncategorised langauges from the decision tree
 indices = output.label_ != -1 
 output2 = output[indices]
@@ -465,8 +460,9 @@ reducer = umap.UMAP(
     random_state=42) # set random seed
 embedding = reducer.fit_transform(string_mat)
 
-np.savetxt(DIR+'results/umap/g1_embeddings.csv', embedding, delimiter=",")
-
+embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
+output = pd.concat([output, embeddings_df], axis=1)
+output.to_csv(DIR+'results/hdbscan/g1.csv')
 
 #### G0 ####
 
@@ -632,8 +628,6 @@ output['label_'] = clusterer.labels_.tolist()
 output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
-output.to_csv(DIR+'results/hdbscan/g0.csv')
-
 # remove uncategorised langauges from the decision tree
 indices = output.label_ != -1 
 output2 = output[indices]
@@ -702,8 +696,9 @@ ax.legend(handles=custom_scatter, loc='lower right', ncol = 3)
 plt.show()
 
 # save embeddings
-np.savetxt(DIR+'results/umap/g0_embeddings.csv', embedding, delimiter=",")
-
+embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
+output = pd.concat([output, embeddings_df], axis=1)
+output.to_csv(DIR+'results/hdbscan/g0.csv')
 
 #### G+2 ####
 
@@ -823,8 +818,6 @@ output['label_'] = clusterer.labels_.tolist()
 output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
-output.to_csv(DIR+'results/hdbscan/g2.csv')
-
 # remove uncategorised langauges from the decision tree
 indices = output.label_ != -1 
 output2 = output[indices]
@@ -882,7 +875,10 @@ reducer = umap.UMAP(
     random_state=42) # set random seed
 embedding = reducer.fit_transform(string_mat)
 
-np.savetxt(DIR+'results/umap/g2_embeddings.csv', embedding, delimiter=",")
+embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
+output = pd.concat([output, embeddings_df], axis=1)
+output.to_csv(DIR+'results/hdbscan/g2.csv')
+
 
 #### G-2 ####
 
@@ -1048,8 +1044,6 @@ output['label_'] = clusterer.labels_.tolist()
 output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
-output.to_csv(DIR+'results/hdbscan/niblings.csv')
-
 # remove uncategorised langauges from the decision tree
 indices = output.label_ != -1 
 output2 = output[indices]
@@ -1109,8 +1103,9 @@ reducer = umap.UMAP(
     random_state=42) # set random seed
 embedding = reducer.fit_transform(string_mat)
 
-np.savetxt(DIR+'results/umap/niblings_embeddings.csv', embedding, delimiter=",")
-
+embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
+output = pd.concat([output, embeddings_df], axis=1)
+output.to_csv(DIR+'results/hdbscan/niblings.csv')
 
 
 

@@ -24,6 +24,8 @@ args = commandArgs(trailingOnly = TRUE)
 # args
 type = args[1]
 
+cat("Analysing:", type, "\n")
+
 glottolog = read.csv('https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/languages.csv', stringsAsFactors = FALSE)
 
 descriptions = suppressMessages(
@@ -112,11 +114,16 @@ out$type = type
 
 # Merge silhouette scores
 silhouette = read.csv(
-  paste0("results/hdbscan/silhouette/g0_all.csv",)
+  paste0("results/global/silhouette/",
+         type,
+         ".csv")
 )
+silhouette$silhouette = silhouette$value
 
+  
+out = left_join(out, silhouette, by = c("label_" = "cluster"))
 
-write.csv(out[,c("label_", "frequency", "diversity", "centrality", "strength", "type")], 
+write.csv(out[,c("label_", "frequency", "diversity", "centrality", "strength", "silhouette", "type")], 
           file = 
             paste0('results/global/data/',
                    type,
