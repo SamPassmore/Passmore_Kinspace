@@ -1,7 +1,9 @@
-library(rethinking)
-library(ggplot2)
-library(patchwork)
-library(dplyr)
+suppressPackageStartupMessages({
+  library(rethinking)
+  library(ggplot2)
+  library(patchwork)
+  library(dplyr)
+})
 
 # colours
 cols = c("#3a4a7b", "#57B5ED","#ED5C4D", "#FF9438", "#FBBE4B")
@@ -18,14 +20,14 @@ data$type_index = as.numeric(data$type)
 
 # data transformations
 # centralise data
-data$diversity.c = data$diversity - mean(data$diversity)
-data$frequency.c = data$frequency - mean(data$frequency)
-data$strength.c = data$strength - mean(data$strength)
+data$diversity.c = data$diversity - mean(data$diversity, na.rm = TRUE)
+data$frequency.c = data$frequency - mean(data$frequency, na.rm = TRUE)
+data$strength.c = data$strength - mean(data$strength, na.rm = TRUE)
 
 # log then centralise data
-data$diversity.lc = log(data$diversity) - mean(log(data$diversity))
-data$frequency.lc = log(data$frequency) - mean(log(data$frequency))
-data$strength.lc = log(data$strength) - mean(log(data$strength))
+data$diversity.lc = log(data$diversity) - mean(log(data$diversity), na.rm = TRUE)
+data$frequency.lc = log(data$frequency) - mean(log(data$frequency), na.rm = TRUE)
+data$strength.lc = log(data$strength) - mean(log(data$strength), na.rm = TRUE)
 
 
 # -- Visualise data -- #
@@ -42,7 +44,7 @@ p2 = ggplot(data, aes(x = strength.lc, y = frequency.lc, group = type, col = typ
 p1 / p2
 
 pdf('results/best-model-plot.pdf', width = 10, height = 8)
-ggplot(data, aes(x = strength.c, y = diversity.c, group = type, col = type)) + 
+ggplot(data, aes(x = strength.c, y = frequency.c, group = type, col = type)) + 
   geom_jitter(width = 0.1, size = 3) +
   geom_smooth(method = "lm", fill = NA, size=2) + 
   theme_light() +
@@ -62,6 +64,8 @@ p4 = ggplot(data, aes(x = strength.lc, y = diversity.lc, group = type, col = typ
 
 p3 / p4
 
+
+data = data[complete.cases(data),]
 
 # -- Models -- #
 # -- Diversity -- #

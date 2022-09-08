@@ -4,7 +4,7 @@ library(ggplot2)
 library(tidyr)
 
 ## G+1 cluster stats
-glottolog = read.csv('raw/glottolog-cldf/cldf/languages.csv', stringsAsFactors = FALSE)
+glottolog = glottolog = read.csv('https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/languages.csv', stringsAsFactors = FALSE)
 
 cluster = read.csv('results/hdbscan/g1.csv', stringsAsFactors = FALSE) %>% 
   dplyr::left_join(., glottolog, "Glottocode")

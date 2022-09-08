@@ -76,9 +76,8 @@ global:
 	
 
 # Create Bayestraits data
-bayestraits: $(DPLACE)
+bayestraits: 
 	@echo "Create data for BayesTraits"
-		cd $(GLOTTOLOG) && git pull
 		mkdir -p data/bayestraits
 		mkdir -p data/bayestraits/modelstrings
 		mkdir -p data/bayestraits/jobs
