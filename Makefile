@@ -75,20 +75,9 @@ global:
 	RScript analysis/global-frequency.R g2
 	
 
-# Create Bayestraits data
-bayestraits: 
-	@echo "Create data for BayesTraits"
-		mkdir -p data/bayestraits
-		mkdir -p data/bayestraits/modelstrings
-		mkdir -p data/bayestraits/jobs
-		mkdir -p results/bayestraits/1
-		mkdir -p results/bayestraits/2
-		mkdir -p results/bayestraits/3
-		mkdir -p results/bayestraits/logs
-		RScript processing/get_btdata.R
-		RScript processing/make_modelstrings.R
-		python processing/make-btscripts.py
-		
+supp_tables: 
+	mkdir -p results/supp_tables
+	RScript processing/supp_tables.R
 
-
-	
+network_model: 
+	RScript analysis/network_model.R

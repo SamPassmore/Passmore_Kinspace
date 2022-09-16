@@ -4,13 +4,14 @@ suppressPackageStartupMessages({
   library(dplyr)
   library(dichromat)
   library(assertthat)
+  library(fossil)
 })
 
 args = commandArgs(trailingOnly = TRUE)
 
 # args
 kt = args[1]
-kt = "g0"
+# kt = "g0"
 
 colour_palatte = c('#297AB1', '#57B5ED', '#71AB7F', '#FBBE4B', 
                    "#FF9438", "#8980D4", "#ED8F57",
@@ -44,11 +45,11 @@ dplace = dplyr::left_join(dplace, dplace.socs, by = c("soc_id"= "id"))
 d2 = dplyr::left_join(clusters, dplace, by = c("Glottocode" = "glottocode"))
 
 n.cols = length(unique(d2$label_)) - 1 # ignore outliers
-if(n.cols < length(colour_palatte)){
+if(n.cols <= length(colour_palatte)){
   g.cols = colour_palatte[1:n.cols]
 } else {
   extra = n.cols - length(colour_palatte)
-  g.cols = c(colour_palatte, colorRampPalette(colour_palatte)(extra + 1))
+  g.cols = c(colour_palatte, colorRampPalette(colour_palatte)(extra))
 }
 
 cols_df = data.frame(cols = g.cols,
@@ -61,7 +62,6 @@ d2 = dplyr::left_join(d2, cols_df, by = "label_")
 # ea kin type colours
 d2$cols.ea = brewer.pal(8, "Set1")[d2$code]
 d2$cols.ea = ifelse(is.na(d2$cols.ea), alpha("grey", 0.5), d2$cols.ea)
-
 
 ## centered labels
 d_c = d2 %>% 
@@ -90,3 +90,22 @@ ggplot(data = d2, aes(x = X, y = Y, label = label_)) +
         axis.text.y=element_blank())
 trash = dev.off()
 
+## Rand index
+d2$g0_numbers = recode(d2$g0,
+      A = 1, B = 1, C = 2, D = 1, E = 1, 
+      F = 1, G = 3, H = 4, I = 4, J = 1, 
+      K = 3, L = 1, M = 1, N = 1, O = 3)
+
+# 1 is Lineal
+# 2 is Descriptive or bifurcate collateral
+# 3 is Bifurcate merging
+# 4 is Generational
+
+rand_df = d2 %>% 
+  select(code, g0_numbers) %>% 
+  na.omit()
+dim(rand_df)
+
+ari = adj.rand.index(rand_df$code, rand_df$g0_numbers)
+
+cat("The adjusted Rand index is", round(ari, 2))

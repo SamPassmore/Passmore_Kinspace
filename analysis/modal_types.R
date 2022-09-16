@@ -67,7 +67,7 @@ for(cs in cluster_sets){
     colnames(df) = c("Cluster", "Count", used_kin_categories)
     
   }
-  modal_types[[c]] = df
+  modal_types[[cs]] = df
 }
 
 filenames = paste0("results/modaltype_",

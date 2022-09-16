@@ -118,8 +118,7 @@ silhouette = read.csv(
          type,
          ".csv")
 )
-silhouette$silhouette = silhouette$value
-
+colnames(silhouette)[2] = "silhouette"
   
 out = left_join(out, silhouette, by = c("label_" = "cluster"))
 

@@ -1,7 +1,9 @@
 # /usr/bin/Rscript
 
-library(rethinking)
-library(dplyr)
+suppressPackageStartupMessages({
+  library(rethinking)
+  library(dplyr)
+})
 
 # model the effect of networks on frequency and on diversity
 
@@ -13,34 +15,34 @@ data = files %>%
   do.call(rbind, .)
 
 # centralise data
-data$diversity.c = data$diversity - mean(data$diversity)
-data$frequency.c = data$frequency - mean(data$frequency)
-data$centrality.c = data$centrality - mean(data$centrality)
-data$strength.c = data$strength - mean(data$strength)
+data$diversity.c = data$diversity - mean(data$diversity, na.rm = TRUE)
+data$frequency.c = data$frequency - mean(data$frequency, na.rm = TRUE)
+data$centrality.c = data$centrality - mean(data$centrality, na.rm = TRUE)
+data$strength.c = data$strength - mean(data$strength, na.rm = TRUE)
 
 # log then centralise data
-data$diversity.lc = log(data$diversity) - mean(log(data$diversity))
-data$frequency.lc = log(data$frequency) - mean(log(data$frequency))
-data$centrality.lc = log(data$centrality) - mean(log(data$centrality))
-data$strength.lc = log(data$strength) - mean(log(data$strength))
+data$diversity.lc = log(data$diversity) - mean(log(data$diversity), na.rm = TRUE)
+data$frequency.lc = log(data$frequency) - mean(log(data$frequency), na.rm = TRUE)
+data$centrality.lc = log(data$centrality) - mean(log(data$centrality), na.rm = TRUE)
+data$strength.lc = log(data$strength) - mean(log(data$strength), na.rm = TRUE)
 
 # plot raw data
 
 # centrality
-ggplot(data, aes(group = type, col = type, x = centrality, y = log(frequency))) + 
+ggplot(data, aes(group = type, col = type, x = centrality, y = (frequency))) + 
   geom_point() +
   geom_smooth(method = "lm", fill = NA, lwd = 0.2)
 
-ggplot(data, aes(group = type, col = type, x = centrality, y = log(diversity))) + 
+ggplot(data, aes(group = type, col = type, x = centrality, y = (diversity))) + 
   geom_point() +
   geom_smooth(method = "lm", fill = NA, lwd = 0.2)
 
 # strength
-ggplot(data, aes(group = type, col = type, x = strength, y = log(diversity))) + 
+ggplot(data, aes(group = type, col = type, x = strength, y = (diversity))) + 
   geom_point() +
   geom_smooth(method = "lm", fill = NA, lwd = 0.2)
 
-ggplot(data, aes(group = type, col = type, x = strength, y = log(diversity))) + 
+ggplot(data, aes(group = type, col = type, x = strength, y = (diversity))) + 
   geom_point() +
   geom_smooth(method = "lm", fill = NA, lwd = 0.2)
 
@@ -92,6 +94,11 @@ dens( prior$a , adj=0.1 )
 
 # posterior check
 precis(fit_null.d)
+
+# Rethinking requires non-missing data
+data = data %>% 
+  dplyr::filter(label_ != "Outlier") %>% 
+  na.omit
 
 # centrality model
 fit_diversity = quap(
@@ -195,7 +202,7 @@ fit_ds2 = quap(
     ba ~ dnorm(0, 1),
     sigma ~ dunif(0, 1)
   ),
-  data = data
+  data = data,
 )
 
 prior <- extract.prior( fit_ds2 , n=1e4 )

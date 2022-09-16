@@ -8,9 +8,10 @@ set.seed(1990)
 out = "data/bayestraits/"
 
 ## phylogeneies
-indoeuropean = read.nexus('dplace-data/phylogenies/bouckaert_et_al2012/posterior.trees')
-austronesian = read.nexus('dplace-data//phylogenies/gray_et_al2009/posterior.trees')
-bantu = read.nexus('dplace-data/phylogenies/grollemund_et_al2015/posterior.trees')
+n_trees = 100
+indoeuropean = read.nexus('dplace-data/phylogenies/bouckaert_et_al2012/posterior.trees')[sample(1:1000, size = n_trees)]
+austronesian = read.nexus('dplace-data//phylogenies/gray_et_al2009/posterior.trees')[sample(1:1000, size = n_trees)]
+bantu = read.nexus('dplace-data/phylogenies/grollemund_et_al2015/posterior.trees')[sample(1:1000, size = n_trees)]
 
 # # fix bantu error
 # bantu = lapply(bantu, function(phy){ 
@@ -95,7 +96,7 @@ get_subsets = function(type){
   # save files
   bt_write(indoeuropean, kinterm_subsets[[1]], "label_", dir = out, filename = paste0(type, "_ie"))
   bt_write(austronesian, kinterm_subsets[[2]], 'label_', dir = out, filename = paste0(type, "_an"))
-  bt_write(bantu, kinterm_subsets[[3]], 'label_', dir = out, filename = paste0(type, "_bt")) 
+  # bt_write(bantu, kinterm_subsets[[3]], 'label_', dir = out, filename = paste0(type, "_bt")) 
 }
 
 get_subsets("siblings")

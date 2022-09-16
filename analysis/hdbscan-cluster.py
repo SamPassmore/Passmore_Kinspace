@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import numpy as np
-import pandas as pd 
+import pandas as pd
 from hdbscan import HDBSCAN
 import umap
 import seaborn as sns
@@ -15,8 +15,8 @@ from matplotlib.lines import Line2D
 from sklearn.tree import DecisionTreeClassifier, plot_tree, export_graphviz # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
-from six import StringIO  
-from IPython.display import Image  
+from six import StringIO
+from IPython.display import Image
 import pydotplus
 
 # random forest
@@ -39,29 +39,29 @@ mcs = 10 # smallest cluster size
 metric = 'jaccard'
 
 colour_set_rgb = [[2,63,165],[125,135,185],[190,193,212],[214,188,192],[187,119,132],[142,6,59],[74,111,227],[133,149,225],[181,187,227],[230,175,185],[224,123,145],[211,63,106],[17,198,56],[141,213,147],[198,222,199],[234,211,198],[240,185,141],[239,151,8],[15,207,192],[156,222,214],[213,234,231],[243,225,235],[246,196,225],[247,156,212]]
-        
+
 colour_set = [[j / 255 for j in x] for x in colour_set_rgb]
 colour_set = [ rgb2hex(i) for i in colour_set]
 
 
-# # Siblings
+#### Siblings ####
 
 ## read in the data
-## these are within language distance matrices - not between language 
+## these are within language distance matrices - not between language
 string_df = pd.read_csv(DIR+"data/matrix/siblings_matrix.csv") #
 
 string_mat = string_df[string_df.columns[:-1]]
 print(string_mat.shape)
 
 # possible distance metrics
-# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev', 
-# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric, 
-# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean', 
+# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev',
+# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric,
+# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean',
 # 'yule', 'wminkowski']
 
 # what settings give the least outliers
 settings=[]
-for x in range(3, 11):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking) 
+for x in range(3, 11):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
         approx_min_span_tree=True,
@@ -71,7 +71,7 @@ for x in range(3, 11):  # check from 3 to 11. 3 is HDBSCAN minimum (below is sin
         min_cluster_size=mcs, # smallest size a cluster can be
         min_samples=x, # how conservative should clustering be (larger = more conservative)
                         # 7 gives the lowest number of outliers.
-        p=None, 
+        p=None,
         cluster_selection_method='eom')
     clusterer.fit(string_mat)
     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
@@ -93,7 +93,7 @@ clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     metric=metric,
     min_cluster_size=mcs, # smallest size a cluster can be
     min_samples=int(ms), # how conservative should clustering be (larger = more conservative)
-    p=None, 
+    p=None,
     cluster_selection_method='eom')
 clusterer.fit(string_mat)
 
@@ -110,7 +110,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # ignore outliers
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output = output[indices]
 strmat_subset = string_mat[indices]
 
@@ -128,7 +128,7 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## random forest 
+## random forest
 forest = ExtraTreesClassifier(n_estimators=1000,
                           random_state=0)
 
@@ -165,7 +165,7 @@ output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 
 # remove uncategorised langauges from the decision tree
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output2 = output[indices]
 string_mat2 = string_mat[indices]
 
@@ -192,12 +192,12 @@ max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
 print(class_names)
 dot_data = StringIO()
-export_graphviz(clf, out_file=dot_data,  
+export_graphviz(clf, out_file=dot_data,
                 filled=True, rounded=True,
                 special_characters=True, feature_names = string_mat2.columns, class_names = class_names)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/siblings.pdf") 
+graph.write_pdf(DIR+"results/decision-trees/siblings.pdf")
 
 #Image(graph.create_png())
 
@@ -229,7 +229,7 @@ reducer = umap.UMAP(
 embedding = reducer.fit_transform(string_mat)
 
 fig, ax = plt.subplots()
-ax.scatter(x = embedding[:,0], y = embedding[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8) 
+ax.scatter(x = embedding[:,0], y = embedding[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
 ax.legend(handles=custom_scatter, loc='lower left', ncol = 3)
 #plt.show()
 
@@ -242,21 +242,21 @@ output.to_csv(DIR+'results/hdbscan/siblings.csv')
 #### G1 ####
 
 ## read in the data
-## these are within language distance matrices - not between language 
+## these are within language distance matrices - not between language
 string_df = pd.read_csv(DIR+"data/matrix/g1_matrix.csv") #
 
 string_mat = string_df[string_df.columns[:-1]]
-print(string_mat.shape) 
+print(string_mat.shape)
 
 # possible distance metrics
-# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev', 
-# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric, 
-# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean', 
+# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev',
+# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric,
+# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean',
 # 'yule', 'wminkowski']
 
 # what settings give the least outliers
 settings = []
-for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking) 
+for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
         approx_min_span_tree=True,
@@ -266,7 +266,7 @@ for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is sin
         min_cluster_size=mcs, # smallest size a cluster can be
         min_samples=x, # how conservative should clustering be (larger = more conservative)
                         # 7 gives the lowest number of outliers.
-        p=None, 
+        p=None,
         cluster_selection_method='eom')
     clusterer.fit(string_mat)
     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
@@ -288,7 +288,7 @@ clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     metric=metric,
     min_cluster_size=mcs, # smallest size a cluster can be
     min_samples=ms, # how conservative should clustering be (larger = more conservative)
-    p=None, 
+    p=None,
     cluster_selection_method='eom')
 clusterer.fit(string_mat)
 
@@ -305,7 +305,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # ignore outliers
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output = output[indices]
 strmat_subset = string_mat[indices]
 
@@ -323,7 +323,7 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## random forest 
+## random forest
 forest = ExtraTreesClassifier(n_estimators=1000,
                           random_state=0)
 
@@ -365,7 +365,7 @@ for x in range(3, 12):
         min_cluster_size=mcs, # smallest size a cluster can be
         min_samples=x, # how conservative should clustering be (larger = more conservative)
                         # 7 gives the lowest number of outliers.
-        p=None, 
+        p=None,
         cluster_selection_method='eom')
     clusterer.fit(FI_mat)
     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
@@ -384,8 +384,8 @@ clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     leaf_size=100,
     metric=metric,
     min_cluster_size=mcs, # smallest size a cluster can be
-    min_samples=ms, # how conservative should clustering be (larger = more conservative) 
-    p=None, 
+    min_samples=ms, # how conservative should clustering be (larger = more conservative)
+    p=None,
     cluster_selection_method='eom')
 clusterer.fit(FI_mat)
 
@@ -402,7 +402,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # remove uncategorised langauges from the decision tree
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output2 = output[indices]
 FI_mat2 = FI_mat[indices]
 
@@ -425,12 +425,12 @@ max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
 print(class_names)
 dot_data = StringIO()
-export_graphviz(clf, out_file=dot_data,  
+export_graphviz(clf, out_file=dot_data,
                 filled=True, rounded=True,
                 special_characters=True, feature_names = FI_mat2.columns, class_names = class_names)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/g1.pdf") 
+graph.write_pdf(DIR+"results/decision-trees/g1.pdf")
 
 #Image(graph.create_png())
 
@@ -454,10 +454,10 @@ for i in range(0, len(unique_groups)):
                           markerfacecolor=unique_colours[i], markersize=10, lw=0))
 
 reducer = umap.UMAP(
-    n_neighbors=200, # low numbers emphasise local structure - high numbers global structure
-    min_dist=0.1, # how tight are values clustered (low = tighter; high = looser)
+    n_neighbors=6, # low numbers emphasise local structure - high numbers global structure
+    min_dist=1, # how tight are values clustered (low = tighter; high = looser)
     n_components=2, # number of dimensions to output
-    random_state=42) # set random seed
+    random_state=42)
 embedding = reducer.fit_transform(string_mat)
 
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
@@ -467,21 +467,21 @@ output.to_csv(DIR+'results/hdbscan/g1.csv')
 #### G0 ####
 
 ## read in the data
-## these are within language distance matrices - not between language 
+## these are within language distance matrices - not between language
 string_df = pd.read_csv(DIR+"data/matrix/g0_matrix.csv") #
 
 string_mat = string_df[string_df.columns[:-1]]
 print(string_mat.shape)
 
 # possible distance metrics
-# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev', 
-# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric, 
-# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean', 
+# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev',
+# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric,
+# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean',
 # 'yule', 'wminkowski']
 
 # what settings give the least outliers
 settings = []
-for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking) 
+for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
         approx_min_span_tree=True,
@@ -491,14 +491,14 @@ for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is sin
         min_cluster_size=mcs, # smallest size a cluster can be
         min_samples=x, # how conservative should clustering be (larger = more conservative)
                         # 7 gives the lowest number of outliers.
-        p=None, 
+        p=None,
         cluster_selection_method='eom')
     clusterer.fit(string_mat)
     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
     cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
     print(x, cluster_count.iloc[0,1])
     settings.append([x, cluster_count.iloc[0,1]])
-    
+
 settings = pd.DataFrame(settings)
 settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
@@ -513,7 +513,7 @@ clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     metric=metric,
     min_cluster_size=mcs, # smallest size a cluster can be
     min_samples=ms, # how conservative should clustering be (larger = more conservative)
-    p=None, 
+    p=None,
     cluster_selection_method='eom')
 clusterer.fit(string_mat)
 
@@ -530,7 +530,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # ignore outliers
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output = output[indices]
 strmat_subset = string_mat[indices]
 
@@ -548,7 +548,7 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## random forest 
+## random forest
 forest = ExtraTreesClassifier(n_estimators=1000,
                           random_state=0)
 
@@ -590,7 +590,7 @@ for x in range(3, 12):
         min_cluster_size=mcs, # smallest size a cluster can be
         min_samples=x, # how conservative should clustering be (larger = more conservative)
                         # 7 gives the lowest number of outliers.
-        p=None, 
+        p=None,
         cluster_selection_method='eom')
     clusterer.fit(FI_mat)
     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
@@ -611,8 +611,8 @@ clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     leaf_size=100,
     metric=metric,
     min_cluster_size=10, # smallest size a cluster can be
-    min_samples=ms, # how conservative should clustering be (larger = more conservative) 
-    p=None, 
+    min_samples=ms, # how conservative should clustering be (larger = more conservative)
+    p=None,
     cluster_selection_method='eom')
 clusterer.fit(FI_mat)
 
@@ -629,7 +629,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # remove uncategorised langauges from the decision tree
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output2 = output[indices]
 FI_mat2 = FI_mat[indices]
 
@@ -652,12 +652,12 @@ max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
 print(class_names)
 dot_data = StringIO()
-export_graphviz(clf, out_file=dot_data,  
+export_graphviz(clf, out_file=dot_data,
                 filled=True, rounded=True,
                 special_characters=True, feature_names = FI_mat2.columns, class_names = class_names)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/g0.pdf") 
+graph.write_pdf(DIR+"results/decision-trees/g0.pdf")
 
 #Image(graph.create_png())
 
@@ -685,7 +685,7 @@ reducer = umap.UMAP(
     min_dist=8, # how tight are values clustered (low = tighter; high = looser)
     n_components=2, # number of dimensions to output
     random_state=42,  # set random seed
-    spread = 10)
+    spread = 10) # set random seed
 embedding = reducer.fit_transform(string_mat)
 
 fig, ax = plt.subplots()
@@ -703,21 +703,21 @@ output.to_csv(DIR+'results/hdbscan/g0.csv')
 #### G+2 ####
 
 ## read in the data
-## these are within language distance matrices - not between language 
+## these are within language distance matrices - not between language
 string_df = pd.read_csv(DIR+"data/matrix/g2_matrix.csv") #
 
 string_mat = string_df[string_df.columns[:-1]]
 print(string_mat.shape)
 
 # possible distance metrics
-# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev', 
-# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric, 
-# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean', 
+# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev',
+# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric,
+# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean',
 # 'yule', 'wminkowski']
 
 # what settings give the least outliers
 settings = []
-for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking) 
+for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
         approx_min_span_tree=True,
@@ -727,14 +727,14 @@ for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is sin
         min_cluster_size=mcs, # smallest size a cluster can be
         min_samples=x, # how conservative should clustering be (larger = more conservative)
                         # 7 gives the lowest number of outliers.
-        p=None, 
+        p=None,
         cluster_selection_method='eom')
     clusterer.fit(string_mat)
     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
     cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
     print(x, cluster_count.iloc[0,1])
     settings.append([x, cluster_count.iloc[0,1]])
-    
+
 settings = pd.DataFrame(settings)
 settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
@@ -749,7 +749,7 @@ clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     metric=metric,
     min_cluster_size=mcs, # smallest size a cluster can be
     min_samples=ms, # how conservative should clustering be (larger = more conservative)
-    p=None, 
+    p=None,
     cluster_selection_method='eom')
 clusterer.fit(string_mat)
 
@@ -766,7 +766,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # ignore outliers
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output = output[indices]
 strmat_subset = string_mat[indices]
 
@@ -784,7 +784,7 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## random forest 
+## random forest
 forest = ExtraTreesClassifier(n_estimators=1000,
                           random_state=0)
 
@@ -819,7 +819,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # remove uncategorised langauges from the decision tree
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output2 = output[indices]
 string_mat2 = string_mat[indices]
 
@@ -842,12 +842,12 @@ max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
 print(class_names)
 dot_data = StringIO()
-export_graphviz(clf, out_file=dot_data,  
+export_graphviz(clf, out_file=dot_data,
                 filled=True, rounded=True,
                 special_characters=True, feature_names = string_mat2.columns, class_names = class_names)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/g2.pdf") 
+graph.write_pdf(DIR+"results/decision-trees/g2.pdf")
 
 label = [clusterer.labels_]
 color_palette = sns.color_palette('Paired', 47)
@@ -869,12 +869,11 @@ for i in range(0, len(unique_groups)):
                           markerfacecolor=unique_colours[i], markersize=10, lw=0))
 
 reducer = umap.UMAP(
-    n_neighbors=200, # low numbers emphasise local structure - high numbers global structure
-    min_dist=0.1, # how tight are values clustered (low = tighter; high = looser)
+    n_neighbors=12, # low numbers emphasise local structure - high numbers global structure
+    min_dist=1, # how tight are values clustered (low = tighter; high = looser)
     n_components=2, # number of dimensions to output
-    random_state=42) # set random seed
+    random_state=42)
 embedding = reducer.fit_transform(string_mat)
-
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
 output = pd.concat([output, embeddings_df], axis=1)
 output.to_csv(DIR+'results/hdbscan/g2.csv')
@@ -883,21 +882,21 @@ output.to_csv(DIR+'results/hdbscan/g2.csv')
 #### G-2 ####
 
 ## read in the data
-## these are within language distance matrices - not between language 
+## these are within language distance matrices - not between language
 string_df = pd.read_csv(DIR+"data/matrix/niblings_matrix.csv") #
 
 string_mat = string_df[string_df.columns[:-1]]
 print(string_mat.shape)
 
 # possible distance metrics
-# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev', 
-# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric, 
-# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean', 
+# ['euclidean', 'l2', 'l1', 'manhattan', 'cityblock', 'braycurtis', 'canberra', 'chebyshev',
+# 'correlation', 'cosine', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', metric,
+# 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean',
 # 'yule', 'wminkowski']
 
 # what settings give the least outliers
 settings = []
-for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking) 
+for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
         approx_min_span_tree=True,
@@ -907,14 +906,14 @@ for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is sin
         min_cluster_size=10, # smallest size a cluster can be
         min_samples=x, # how conservative should clustering be (larger = more conservative)
                         # 7 gives the lowest number of outliers.
-        p=None, 
+        p=None,
         cluster_selection_method='eom')
     clusterer.fit(string_mat)
     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
     cluster_count = pd.DataFrame(np.transpose(cluster_count), columns = ['Group', 'Count'])
     print(x, cluster_count.iloc[0,1])
     settings.append([x, cluster_count.iloc[0,1]])
-    
+
 settings = pd.DataFrame(settings)
 settings.columns = ['value', 'outliers']
 settings = settings.loc[settings['outliers'].idxmin()]
@@ -929,7 +928,7 @@ clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     metric=metric,
     min_cluster_size=mcs, # smallest size a cluster can be
     min_samples=ms, # how conservative should clustering be (larger = more conservative)
-    p=None, 
+    p=None,
     cluster_selection_method='eom')
 clusterer.fit(string_mat)
 
@@ -946,7 +945,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # ignore outliers
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output = output[indices]
 strmat_subset = string_mat[indices]
 
@@ -964,7 +963,7 @@ y_pred = clf.predict(x_test)
 
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-## random forest 
+## random forest
 forest = ExtraTreesClassifier(n_estimators=1000,
                           random_state=0)
 
@@ -1006,7 +1005,7 @@ for x in range(3, 12):
         min_cluster_size=mcs, # smallest size a cluster can be
         min_samples=x, # how conservative should clustering be (larger = more conservative)
                         # 7 gives the lowest number of outliers.
-        p=None, 
+        p=None,
         cluster_selection_method='eom')
     clusterer.fit(FI_mat)
     cluster_count = list(np.unique(clusterer.labels_, return_counts=True))
@@ -1027,8 +1026,8 @@ clusterer = HDBSCAN(algorithm='best', alpha=1.0,
     leaf_size=100,
     metric=metric,
     min_cluster_size=10, # smallest size a cluster can be
-    min_samples=ms, # how conservative should clustering be (larger = more conservative) 
-    p=None, 
+    min_samples=ms, # how conservative should clustering be (larger = more conservative)
+    p=None,
     cluster_selection_method='eom')
 clusterer.fit(FI_mat)
 
@@ -1045,7 +1044,7 @@ output['outlier_prob'] = clusterer.outlier_scores_.tolist()
 output['cluster_prob'] = clusterer.probabilities_.tolist()
 
 # remove uncategorised langauges from the decision tree
-indices = output.label_ != -1 
+indices = output.label_ != -1
 output2 = output[indices]
 string_mat2 = string_mat[indices]
 
@@ -1068,12 +1067,12 @@ max_class = np.max(output2['label_'])
 class_names = [str(x) for x in (range(0, max_class+1))]
 print(class_names)
 dot_data = StringIO()
-export_graphviz(clf, out_file=dot_data,  
+export_graphviz(clf, out_file=dot_data,
                 filled=True, rounded=True,
                 special_characters=True, feature_names = string_mat2.columns, class_names = class_names)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/niblings.pdf") 
+graph.write_pdf(DIR+"results/decision-trees/niblings.pdf")
 
 #Image(graph.create_png())
 
@@ -1097,16 +1096,13 @@ for i in range(0, len(unique_groups)):
                           markerfacecolor=unique_colours[i], markersize=10, lw=0))
 
 reducer = umap.UMAP(
-    n_neighbors=200, # low numbers emphasise local structure - high numbers global structure
-    min_dist=0.1, # how tight are values clustered (low = tighter; high = looser)
+    n_neighbors=50, # low numbers emphasise local structure - high numbers global structure
+    min_dist=8, # how tight are values clustered (low = tighter; high = looser)
     n_components=2, # number of dimensions to output
-    random_state=42) # set random seed
+    random_state=42,  # set random seed
+    spread = 10) # set random seed
 embedding = reducer.fit_transform(string_mat)
 
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
 output = pd.concat([output, embeddings_df], axis=1)
 output.to_csv(DIR+'results/hdbscan/niblings.csv')
-
-
-
-

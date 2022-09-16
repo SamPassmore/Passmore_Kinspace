@@ -12,3 +12,6 @@ results/
 ~$*.xls*
 
 BayesTraitsV4.0.0-OSX/
+.ipynb_checkpoints/
+Untitled.ipynb
+test.py
