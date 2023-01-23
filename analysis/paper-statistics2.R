@@ -29,7 +29,6 @@ subsets %>%
   group_by(type) %>% 
   mutate() 
   
-
 subsets %>%
   dplyr::filter(type == "g0") 
 
@@ -43,9 +42,9 @@ subsets =
   mutate(total = sum(frequency),
          prop = frequency / total,
          diversity.rank = dense_rank(desc(diversity)),
-         frequency.rank = dense_rank(desc(frequency)),
-         id = n():1) %>% 
-  arrange(type, prop)
+         frequency.rank = dense_rank(desc(frequency))) %>% 
+  arrange(type, prop) %>% 
+  mutate(id = n():1)
 
 table(subsets$frequency.rank, 
       subsets$diversity.rank)
@@ -86,6 +85,28 @@ p1 =
 p1
 ggsave(filename = "results/figure_5.jpeg", plot = p1, bg = 'white',
        width = 190, height = 100, units = "mm")
+
+cols = c("#57B5ED", "#ED5C4D", "#F4E9DA", "#FBBE4B", "#ED8F57")
+
+p2 = ggplot(subsets, aes(y = prop, x = diversity)) +
+  geom_point(aes(col = type, fill = type), colour = "black",
+             shape = 21, size = 4, alpha = 0.7) +xlab("") +
+  ylab("Proportion of total") +
+  xlab("Diversity score") +
+  ylim(c(0, 0.6)) + 
+  theme_linedraw() +
+  facet_wrap(~type, nrow = 2) + 
+  coord_cartesian(clip = 'off') + 
+  guides(fill = "none") +
+  scale_fill_manual(values = cols) + 
+  theme(legend.title = element_blank(), legend.direction = "horizontal",
+        strip.text = element_markdown(),
+        legend.position = "bottom",
+        legend.box.just = "right",
+        legend.text = element_markdown())
+
+ggsave(filename = "results/figure_5_alt.jpeg", plot = p2, bg = 'white', height = 290/2, width = 210, units = "mm")
+
 
 p2 = 
   ggplot(subsets, aes(size = diversity, y = prop, x = id)) +
@@ -198,3 +219,6 @@ idx = (g0$mFBeSmeB == 1 &
          g0$mFZeDmeZ == 0 & 
          g0$meZfMZeD == 1)
 g0$Glottocode[idx]
+
+
+

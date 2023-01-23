@@ -36,7 +36,9 @@ cluster_joined = dplyr::left_join(cluster, nr_types, by = "Glottocode")
 (table(cluster_joined$label_, cluster_joined$nr_type))
 
 # total rand index
-pdfCluster::adj.rand.index(cluster_joined$label_, cluster_joined$nr_type)
+rand_df = cluster_joined %>% 
+  filter(nr_type != "none")
+pdfCluster::adj.rand.index(rand_df$label_, rand_df$nr_type)
 
 # rand index with reclassified reversals & derivatives
 ## here I merge the two reversed / derivative clusters into one (as per N&R)

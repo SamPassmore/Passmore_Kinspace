@@ -64,7 +64,7 @@ cond_prob_BgvA = function(a, b){
 # b = c(1, 2, 3)
 # cond_prob_BgvA(a, b)
 
-revert_vector = function(v, nmes){
+revert_vector = function(v, nmes = "none"){
   require(igraph)
   
   n = length(v)
@@ -76,7 +76,10 @@ revert_vector = function(v, nmes){
   
   dd = graph_from_adjacency_matrix(mat, mode = "undirected") %>% 
     clusters() %>% {.$membership}
-  names(dd) = nmes
+  
+  if(nmes[1] != "none"){
+    names(dd) = nmes  
+  }
   dd
 }
 

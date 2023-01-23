@@ -102,13 +102,18 @@ centrality_raw = data.frame(label_ = as.factor(names(centrality)), centrality = 
 sr = get_diversity(cluster_subset, TRUE)
 simpson_raw = data.frame(label_ = as.factor(rownames(sr)), diversity = round(sr, 2))
 
+# Calculate links
+table_count = data.frame(table(c(edges$to, edges$from)))
+
+
 # Calculate the frequency of each type
 frequency_raw = as.data.frame(table(cluster$label_))
 colnames(frequency_raw) = c("label_", "frequency")
 
 # Build summary output
 out = dplyr::left_join(simpson_raw, frequency_raw, by = "label_") %>% 
-  dplyr::left_join(., centrality_raw, by = "label_")
+  dplyr::left_join(., centrality_raw, by = "label_") %>% 
+  dplyr::left_join(., table_count, by = c("label_" = "Var1")) 
 
 out$type = type
 
@@ -122,7 +127,7 @@ colnames(silhouette)[2] = "silhouette"
   
 out = left_join(out, silhouette, by = c("label_" = "cluster"))
 
-write.csv(out[,c("label_", "frequency", "diversity", "centrality", "strength", "silhouette", "type")], 
+write.csv(out[,c("label_", "frequency", "diversity", "centrality", "strength", "silhouette", "Freq", "type")], 
           file = 
             paste0('results/global/data/',
                    type,
