@@ -1,5 +1,7 @@
 # The global recurrence and variability of kinship terminology structure
 
+[![DOI](https://zenodo.org/badge/530092055.svg)](https://zenodo.org/badge/latestdoi/530092055)
+
 This is the code repository for Passmore (XXXX) "The global recurrence and variability of kinship terminology structure". The manuscript is publicly available at XXXX. 
 
 The analysis and figures can be run from the Makefile, found in the home directory. The Makefile should be run in the following steps (available via `make help`):
