@@ -1,3 +1,4 @@
 [submodule "kinbank"]
 	path = kinbank
 	url = https://github.com/kinbank/kinbank
+	ignore = dirty
