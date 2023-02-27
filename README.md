@@ -19,6 +19,6 @@ Running the entire analysis should take less than 1 hour.
 **For assitance please contact Sam Passmore (samuel.passmore [at] anu.edu.au)**
 
 ## Data 
-Data for this analysis is drawn from Kinbank (Passmore et al. 2023). Kinbank data is available in an interactive format at www.kinbank.org. It has also been archived on github at github.com/kinbank and is versioned on Zenodo at https://zenodo.org/account/settings/github/repository/kinbank/kinbank.
+Data for this analysis is drawn from Kinbank (Passmore et al. 2023). Kinbank data is available in an interactive format at www.kinbank.org. It has also been archived on github at www.github.com/kinbank and is versioned on Zenodo at https://zenodo.org/account/settings/github/repository/kinbank/kinbank.
 Kinbank is the amalgamation of four different projects, which you can see seperately at the github address. Please cite the most appropriate dataset for your project. 
 
