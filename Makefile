@@ -1,22 +1,12 @@
-KINBANK_REPO=https://github.com/kinbank/kinbank
-GLOTTOLOG_REPO=https://github.com/glottolog/glottolog-cldf.git
-DPLACE_REPO=https://github.com/D-PLACE/dplace-data.git
-
-KINBANK=raw/kinbank
-GLOTTOLOG=raw/glottolog
-DPLACE=raw/dplace
 
 help:
-	@echo 1. make data
-	@echo 2. make subset
-	@echo 3. make matrix
-	@echo 4. make cluster
-	@echo Then manually determine clusters
-	@echo 5. make umap will plot the results colored by cluster and EA categorisation
-	@echo 6. make global
-	@echo 7. make bayestraits
-	@echo Then run models on bluecrystal
-	
+	@echo 1. make data will process the kinbank data into the right format
+	@echo 2. make subset will subset the data for each generational subset
+	@echo 3. make matrix will create structural matrices for each generational subset
+	@echo 4. make cluster will use the structural matrices to estimate clusters
+	@echo 5. make umap will project the structural matrices into a two dimensional space. 
+	@echo I review the clustering output to determine the structure of the clusters
+	@echo 6. make global performs the post-hoc tests of cluster stability 
 
 clean: 
 	rm -rf raw
@@ -48,9 +38,6 @@ cluster:
 	RScript analysis/cluster_tolanguages.R # Build summary file
 	RScript analysis/modal_types.R # Identify the most common structure within each cluster
 	
-# manually determine clusters & their DAGs
-# DAGs are directed by the addition of a term (although direction is not indiciative of change likelihood)
-
 # Create kinspace projections
 umap: 
 	RScript analysis/plot-umap.R siblings
@@ -74,7 +61,6 @@ global:
 	RScript analysis/global-frequency.R g1
 	RScript analysis/global-frequency.R g2
 	
-
 supp_tables: 
 	mkdir -p results/supp_tables
 	RScript processing/supp_tables.R

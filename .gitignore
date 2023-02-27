@@ -7,6 +7,8 @@ results/
 .Rhistory
 .RData
 .Ruserdata
+*.DS_Store
+
 
 # Excel temporary
 ~$*.xls*
