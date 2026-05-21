@@ -6,17 +6,20 @@ This is the code repository for Passmore (In Prep) "The global recurrence and va
 
 The analysis and figures can be run from the Makefile, found in the home directory. The Makefile should be run in the following steps (available via `make help`):
 
-1. `make data` will process the kinbank data into the right format
-2. `make subset` will subset the data for each generational subset
-3. `make matrix` will create structural matrices for each generational subset
-4. `make cluster` will use the structural matrices to estimate clusters
-5. `make umap` will project the structural matrices into a two dimensional space and create the figures.  
+1. `make data` initialises the Kinbank git submodule
+2. `make subset` subsets the data for each generational domain (siblings, g0, g1, g2, niblings)
+3. `make matrix` creates structural vectors and distance matrices for each generational subset
+4. `make cluster` applies HDBSCAN clustering to the structural matrices and projects them into two dimensions using UMAP
 
-At this point, I manually review the clustering output to determine the the qualitative meaning of each cluster, and prepare the data for post-hoc analysis. To view the summarised output download the file `Supplementary Tables.xlsx` in the home of this repository. 
+At this point, manually review the clustering output to determine the qualitative meaning of each cluster, and prepare the data for post-hoc analysis. To view the summarised output download the file `Supplementary Tables.xlsx` in the home of this repository.
 
-6. `make global` performs the post-hoc tests of cluster stability 
+5. `make global` calculates silhouette scores and global frequency distributions for each cluster
+6. `make trees` fits decision trees to characterise the key distinctions within each cluster
+7. `make tables_figures` generates all paper tables and figures
+8. `make supp_tables` generates the supplementary tables
+9. `make network_model` fits the Bayesian network model
 
-Running the entire analysis should take less than 1 hour. 
+Running the entire analysis should take less than 1 hour.
 
 **For assitance please contact Sam Passmore (samuel.passmore [at] anu.edu.au)**
 
