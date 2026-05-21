@@ -88,7 +88,7 @@ siblings = terms_w[,sibling_columns] %>% filter(complete.cases(.))
 #dim(siblings)
 sib_test = all(colnames(siblings) %in% c("feB", "feZ", "fyB", "fyZ", "meB", "meZ", "myB", "myZ", "Glottocode"))
 
-write.csv(siblings, 'data/terms/sibling_terms.csv', row.names = FALSE, quote = FALSE, fileEncoding = 'utf8')
+write.csv(siblings, 'data/terms/siblings_terms.csv', row.names = FALSE, quote = FALSE, fileEncoding = 'utf8')
 
 ## Cousins
 ### For cousins we deliberately exclude terms for languages where
@@ -117,7 +117,7 @@ g2_test = ncol(g2) == 9
 ## G-1 [niblings and children]
 nibling_columns = str_detect(colnames(terms_w), "^(m|f)(e|y)(B|Z)(S|D)$|^(m|f)(S|D)$|Glottocode")
 niblings = terms_w[,nibling_columns] %>% filter(complete.cases(.))
-write.csv(niblings, 'data/terms/nibling_terms.csv', row.names = FALSE, quote = FALSE, fileEncoding = 'utf8')
+write.csv(niblings, 'data/terms/niblings_terms.csv', row.names = FALSE, quote = FALSE, fileEncoding = 'utf8')
 niblings_test = all(colnames(niblings) %in% c("feBS", "fyBS", "feBD", "fyBD", "feZS", "fyZS", "feZD", "fyZD", "fS", "fD", "meBS", "myBS", "meBD", "myBD", "meZS", "myZS", "meZD", "myZD", "mS", "mD", "Glottocode"))
 
 cat('Siblings:\n # Languages:', nrow(siblings), '\n # Columns:', ncol(siblings), '\n Pass:', sib_test, "\n")

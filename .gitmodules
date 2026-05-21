@@ -2,3 +2,6 @@
 	path = kinbank
 	url = https://github.com/kinbank/kinbank
 	ignore = dirty
+[submodule "dplace-data"]
+	path = dplace-data
+	url = https://github.com/D-PLACE/dplace-data.git

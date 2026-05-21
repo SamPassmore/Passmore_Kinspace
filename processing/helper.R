@@ -83,26 +83,27 @@ revert_vector = function(v, nmes = "none"){
   dd
 }
 
-get_diversity = function(x, i){
+get_diversity = function(data, i, label = "label_", group = "Family_ID"){
   # get subset
   # i in the rows is where the bootstrapping takes place
-  x = x[i,]
+  data = data[i,]
   
   # get counts
-  cluster_count = x %>% 
-    group_by(label_, Family_ID) %>% 
+  cluster_count = data %>% 
+    filter(.data[[group]] != "") %>% 
+    group_by(.data[[label]], .data[[group]]) %>% 
     dplyr::summarise(count = n(), .groups = "drop_last")
   
   # make community matrix
-  community_matrix = tidyr::spread(cluster_count[,c("label_", "Family_ID", "count")], 
-                                   key = "label_", value = "count", fill = 0) # NAs are 0
+  community_matrix = tidyr::spread(cluster_count[,c(label, group, "count")], 
+                                   key = label, value = "count", fill = 0) # NAs are 0
   
-  diversity_matrix = as.matrix(community_matrix[,!names(community_matrix) %in% "Family_ID"])
-  rownames(diversity_matrix) = community_matrix$Family_ID
+  diversity_matrix = as.matrix(community_matrix[,!names(community_matrix) %in% group])
+  rownames(diversity_matrix) = unlist(community_matrix[,group])
   dm = vegan::diversity(diversity_matrix, MARGIN = 2, index = "simpson") # diversity measure
   
   # make output table
-  types = unique(x$label_)
+  types = unique(data[,label])
   out = matrix(NA, nrow = length(types))
   rownames(out) = sort(types)
   

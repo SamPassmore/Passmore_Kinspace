@@ -1,9 +1,33 @@
+# Figure 1
+
 # sibling POC
 source('processing/helper.R')
 library(pdfCluster)
 library(dplyr)
+library(tidyr)
+library(patchwork)
+library(ggplot2)
+
+to_letters = function(x){
+  tt = sort(table(x), decreasing = TRUE)
+  tt_df = data.frame(tt)
+  
+  outliers = tt_df[tt_df$x == "-1",]
+  
+  df_ss = tt_df[tt_df$x != "-1",]
+  df_ss$letter_labels = LETTERS[1:nrow(df_ss)]
+  
+  outliers$letter_labels = "Outlier"
+  
+  out = rbind(df_ss, outliers)
+  out$x = as.numeric(as.character(out$x))
+  out$letter_labels
+}
 
 # make structural vectors for exemplary types
+nr_freq = read.csv('data/nerlove-frequency.csv') %>% 
+  select(type, nerlove)
+
 nr_types = read.csv('data/nerlove-typology.csv', stringsAsFactors = FALSE) %>% 
   t()
 
@@ -33,8 +57,6 @@ cluster = read.csv('results/hdbscan/siblings_hamming.csv', stringsAsFactors = FA
 
 cluster_joined = dplyr::left_join(cluster, nr_types, by = "Glottocode")
 
-(table(cluster_joined$label_, cluster_joined$nr_type))
-
 # total rand index
 rand_df = cluster_joined %>% 
   filter(nr_type != "none")
@@ -58,21 +80,50 @@ cluster_joined$nr_adjust = ifelse(cluster_joined$nr_type == 'none' & cluster_joi
                                   'type.5', as.character(cluster_joined$nr_adjust))
 
 
-table(cluster_joined$label_adj, cluster_joined$nr_adjust)
+# table(cluster_joined$label_adj, cluster_joined$nr_adjust)
 pdfCluster::adj.rand.index(cluster_joined$label_adj, cluster_joined$nr_adjust)
 
 # rand index of exact matches
 idx = cluster_joined$nr_type != 'none'
 pdfCluster::adj.rand.index(cluster_joined$label_[idx], cluster_joined$nr_type[idx])
 
-## qualitative review of languages
-terms = read.csv('data/terms/siblings_terms.csv', stringsAsFactors = FALSE)
-terms_j = dplyr::left_join(terms, cluster_joined, "Glottocode")
+nr_long = cluster_joined %>% 
+  group_by(nr_type) %>% 
+  filter(nr_type != "none") %>% 
+  summarise(kinbank = n()) %>% 
+  mutate(type = gsub("type.", "", nr_type),
+         type = ifelse(type == "none", "other", type)) %>% 
+  left_join(., nr_freq, "type") %>%
+  select(type, nerlove, kinbank) %>% 
+  pivot_longer(., cols = c("nerlove", "kinbank")) %>% 
+  group_by(name) %>% 
+  mutate(percent = value / sum(value, na.rm = T),
+         type = factor(type, levels = c(1:12, "other"))) %>% 
+  arrange(desc(value)) 
 
-test = terms_j %>% 
-       dplyr::filter(label_ == 2 & nr_type != 'type.6')
+kb = nr_long %>% filter(name == "kinbank") %>% arrange(desc(value)) %>% mutate(letter_label = LETTERS[1:n()]) %>%
+  ungroup() %>% dplyr::select(type, letter_label)
 
-View(test)
+nr_long = left_join(nr_long, kb) %>% 
+  mutate(plot_label = paste(letter_label, " (", type, ")", sep = ))
 
-apply(test[,1:8], 1, function(x) length(unique(x)))
-      
+p1 = ggplot(nr_long, aes(y = percent, x = plot_label, fill = name)) + 
+  geom_bar(stat = 'identity', position = "dodge") + 
+  ylab("Percent of sample") +
+  xlab("Cluster (N&R Type)") +
+  theme_minimal() +
+  scale_fill_manual(values = c("#FBBE4B", "#ED5C4D"), labels = c("Kinbank", "N&R")) +
+  theme(legend.position = c(0.9, 0.95), legend.title = element_blank(),
+        text = element_text(size=20)) 
+
+ggsave(plot = p1, filename = "results/umap/sibling_frequency.pdf")
+
+# load("results/umap/siblings_ggplot.rdata")
+# 
+# p3 = pp + p1
+# 
+# pdf("results/figure_1.pdf", width = 8, height = 4)
+# p3
+# dev.off()
+# 
+# 

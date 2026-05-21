@@ -35,17 +35,7 @@ cluster:
 	python3 -m venv myvenv
 	myvenv/bin/pip3 install -r requirements.txt 
 	myvenv/bin/python3 analysis/hdbscan-cluster.py # Cluster languages
-	RScript analysis/cluster_tolanguages.R # Build summary file
-	RScript analysis/modal_types.R # Identify the most common structure within each cluster
 	
-# Create kinspace projections
-umap: 
-	RScript analysis/plot-umap.R siblings
-	RScript analysis/plot-umap.R niblings
-	RScript analysis/plot-umap.R g0
-	RScript analysis/plot-umap.R g1
-	RScript analysis/plot-umap.R g2
-
 # Create global level frequency graphs 
 global:
 	@echo "Create global frequency graphs"
@@ -60,7 +50,29 @@ global:
 	RScript analysis/global-frequency.R g0
 	RScript analysis/global-frequency.R g1
 	RScript analysis/global-frequency.R g2
-	
+
+trees:
+	@echo "Create decision trees"
+	mkdir -p results/trees
+	RScript analysis/decision_trees.R siblings
+	RScript analysis/decision_trees.R niblings
+	RScript analysis/decision_trees.R g0
+	RScript analysis/decision_trees.R g1
+	RScript analysis/decision_trees.R g2
+
+tables_figures:
+	RScript analysis/cluster_tolanguages.R # Build summary file
+	RScript analysis/modal_types.R # Identify the most common structure within each cluster
+	RScript analysis/table_1.R
+	RScript analysis/table_2.R
+	RScript analysis/plot-umap.R siblings # part of Figure 1 
+	RScript analysis/figure_1.R
+	RScript analysis/plot-umap.R g0 # Figure 2
+	RScript analysis/plot-umap.R g1 # Figure 3
+	RScript analysis/plot-umap.R g2 # Figure 4
+	RScript analysis/plot-umap.R niblings # Figure 5
+
+
 supp_tables: 
 	mkdir -p results/supp_tables
 	RScript processing/supp_tables.R

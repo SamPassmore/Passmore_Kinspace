@@ -1,6 +1,7 @@
 # folders
 myvenv/
 results/
+results - sub 1/
 
 # R Files
 .Rproj.user
@@ -17,3 +18,4 @@ BayesTraitsV4.0.0-OSX/
 .ipynb_checkpoints/
 Untitled.ipynb
 test.py
+.positai

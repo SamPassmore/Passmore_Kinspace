@@ -36,7 +36,7 @@ plot_kwds = {'alpha' : 0.5, 's' : 80, 'linewidths':0}
 DIR=""
 
 mcs = 10 # smallest cluster size
-metric = 'jaccard'
+metric = 'hamming'
 
 colour_set_rgb = [[2,63,165],[125,135,185],[190,193,212],[214,188,192],[187,119,132],[142,6,59],[74,111,227],[133,149,225],[181,187,227],[230,175,185],[224,123,145],[211,63,106],[17,198,56],[141,213,147],[198,222,199],[234,211,198],[240,185,141],[239,151,8],[15,207,192],[156,222,214],[213,234,231],[243,225,235],[246,196,225],[247,156,212]]
 
@@ -197,7 +197,7 @@ export_graphviz(clf, out_file=dot_data,
                 special_characters=True, feature_names = string_mat2.columns, class_names = class_names)
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/siblings.pdf")
+graph.write_pdf(DIR+"results/decision-trees/siblings_"+metric+".pdf")
 
 #Image(graph.create_png())
 
@@ -235,7 +235,7 @@ ax.legend(handles=custom_scatter, loc='lower left', ncol = 3)
 
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
 output = pd.concat([output, embeddings_df], axis=1)
-output.to_csv(DIR+'results/hdbscan/siblings.csv')
+output.to_csv(DIR+'results/hdbscan/siblings_'+metric+'.csv')
 
 
 
@@ -462,7 +462,7 @@ embedding = reducer.fit_transform(string_mat)
 
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
 output = pd.concat([output, embeddings_df], axis=1)
-output.to_csv(DIR+'results/hdbscan/g1.csv')
+output.to_csv(DIR+'results/hdbscan/g1_'+metric+'.csv')
 
 #### G0 ####
 
@@ -698,7 +698,7 @@ plt.show()
 # save embeddings
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
 output = pd.concat([output, embeddings_df], axis=1)
-output.to_csv(DIR+'results/hdbscan/g0.csv')
+output.to_csv(DIR+'results/hdbscan/g0_'+metric+'.csv')
 
 #### G+2 ####
 
@@ -876,7 +876,7 @@ reducer = umap.UMAP(
 embedding = reducer.fit_transform(string_mat)
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
 output = pd.concat([output, embeddings_df], axis=1)
-output.to_csv(DIR+'results/hdbscan/g2.csv')
+output.to_csv(DIR+'results/hdbscan/g2_'+metric+'.csv')
 
 
 #### G-2 ####
@@ -1105,4 +1105,4 @@ embedding = reducer.fit_transform(string_mat)
 
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
 output = pd.concat([output, embeddings_df], axis=1)
-output.to_csv(DIR+'results/hdbscan/niblings.csv')
+output.to_csv(DIR+'results/hdbscan/niblings_'+metric+'.csv')

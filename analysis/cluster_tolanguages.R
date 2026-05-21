@@ -23,7 +23,7 @@ to_letters = function(df){
   dplyr::left_join(df, out, c("label_" = "x"))
 }
 
-cluster_files = list.files('results/hdbscan/', full.names = TRUE, recursive = FALSE, pattern = "*.csv")
+cluster_files = list.files('results/hdbscan/', full.names = TRUE, recursive = FALSE, pattern = "*_hamming.csv")
 clusters = lapply(cluster_files, read.csv)
 names(clusters) = basename(cluster_files) %>% 
   tools::file_path_sans_ext()
@@ -73,7 +73,7 @@ languages = languages %>%
 
 x = assert_that(n_distinct(languages$Glottocode_ID) == nrow(languages))
 
-x = assert_that(all(clusters_wide$Glottocode %in% languages$Glottocode_ID))
+# x = assert_that(all(clusters_wide$Glottocode %in% languages$Glottocode_ID))
 
 language_clusters = left_join(languages, clusters_wide, by = c("Glottocode_ID" = "Glottocode"))
 

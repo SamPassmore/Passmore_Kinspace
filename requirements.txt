@@ -5,7 +5,7 @@ umap-learn
 seaborn
 matplotlib
 plotly
-sklearn
+scikit-learn
 pydotplus
 six
 IPython
