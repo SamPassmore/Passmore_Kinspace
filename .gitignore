@@ -2,6 +2,7 @@
 myvenv/
 results/
 results - sub 1/
+surplus/
 
 # R Files
 .Rproj.user
