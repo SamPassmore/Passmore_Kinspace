@@ -3,7 +3,6 @@
 suppressPackageStartupMessages({
   library(dplyr)
   library(stringr)
-  # library(party)
   library(ggparty)
   library(partykit)
 })
@@ -13,11 +12,10 @@ args = commandArgs(trailingOnly = TRUE)
 
 # args
 type = args[1]
-# type = "siblings"
 cat("Analysing:", type, "\n")
 
 # Get the data
-c_filename = paste0("results/hdbscan/", type, ".csv")
+# Note: always reads from the combined cluster file, not individual hdbscan outputs
 c_filename = "results/kinbank_wclusters.csv"
 f_filename = paste0("data/matrix/", type, "_matrix.csv")
 
@@ -25,9 +23,6 @@ clusters = read.csv(c_filename)
 features = read.csv(f_filename)
 
 data = left_join(clusters, features, "Glottocode")
-
-# data$label_ = factor(data$label_)
-
 
 # make dataset
 pv_idx = stringr::str_detect(colnames(data), "^[m|f]")

@@ -90,7 +90,7 @@ p1 = ggplot(data, aes(y = frequency, x = Freq)) +
 
 ggsave(filename = "results/figure_6.jpeg", plot = p1, bg = 'white', height = 290/2, width = 210, units = "mm")
 
-## Diversity models
+## Diversity models (exploratory — results printed to console only, not saved)
 fit.0 = brm(diversity ~ strength, data = data)
 fit.1 = brm(diversity ~ strength + (1|type), data = data)
 fit.2 = brm(diversity ~ strength + (strength|type), data = data)
@@ -116,18 +116,19 @@ hum_names <- as_labeller(
     niblings = "Niblings",
     siblings = "Siblings"))
 
-ggplot(data, aes(y = diversity, x = strength, col = type)) + 
-  geom_point() + 
-  scale_color_manual(values = cols) + 
-  facet_wrap(~type, nrow = 2, labeller = hum_names) + 
-  ylab("Diversity") + xlab("Strength") + 
+# Diagnostic scatter plots (display only — not saved to file)
+ggplot(data, aes(y = diversity, x = strength, col = type)) +
+  geom_point() +
+  scale_color_manual(values = cols) +
+  facet_wrap(~type, nrow = 2, labeller = hum_names) +
+  ylab("Diversity") + xlab("Strength") +
   theme(legend.position = "none")
 
-ggplot(data, aes(y = frequency, x = Freq, col = type)) + 
-  geom_point() + 
-  scale_color_manual(values = cols) + 
-  facet_wrap(~type, nrow = 2, labeller = hum_names, scale = "free_y") + 
-  ylab("Diversity") + xlab("Strength") + 
+ggplot(data, aes(y = frequency, x = Freq, col = type)) +
+  geom_point() +
+  scale_color_manual(values = cols) +
+  facet_wrap(~type, nrow = 2, labeller = hum_names, scale = "free_y") +
+  ylab("Diversity") + xlab("Strength") +
   theme(legend.position = "none")
 
 

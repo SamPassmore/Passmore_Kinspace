@@ -26,8 +26,7 @@ get_vector = function(x, method){
   m
 }
 
-# --- Functions --- #
-# # conditional probability
+# conditional probability of b given a, across all unique combinations
 cond_prob_BgvA = function(a, b){
   require(tidyr)
   if(length(a) != length(b))

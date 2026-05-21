@@ -77,7 +77,7 @@ g1_matrix = apply(g1 %>% select(-Glottocode), 1, get_vector, method = method) %>
 g1_matrix$Glottocode = g1$Glottocode
 write.csv(g1_matrix, 'data/matrix/g1_matrix.csv', row.names = FALSE)
 
-n = 10 # kin types in cousins (usually 20, but we are not taking sex of speaker here)
+n = 10 # kin types in g+1 (usually 20, but we drop sex-of-speaker columns here)
 
 cat("G+1: \n Sex of Speaker:", round(sos_g1[[2]], 2), 
     "\n Keep SoS:", sos_g1[[2]] > 0.1, 
@@ -97,7 +97,7 @@ g2_matrix = apply(g2 %>% select(-Glottocode), 1, get_vector, method = method) %>
 g2_matrix$Glottocode = g2$Glottocode
 write.csv(g2_matrix, 'data/matrix/g2_matrix.csv', row.names = FALSE)
 
-n = 4 # kin types in cousins
+n = 4 # kin types in g+2 (sex-of-speaker dropped)
 
 cat("G+2: \n Sex of Speaker:", round(sos_g2[[2]], 2), 
     "\n Keep SoS:", sos_g2[[2]] > 0.1, 
@@ -119,21 +119,3 @@ cat("G-1: \n Sex of Speaker:", round(sos_nib[[2]], 2),
     "\n # Languages: ", nrow(nibling_matrix),
     "\n Pass: ", ncol(nibling_matrix) == (((n * n) / 2) - (n / 2)) + 1, "\n")
 
-
-# ## cousins vs siblings
-# matching_languages = siblings$Glottocode[siblings$Glottocode %in% cousins$Glottocode]
-# 
-# cousinXsiblings = matrix(NA, nrow = length(matching_languages), ncol = 28)
-# for(i in 1:length(matching_languages)){
-#   glottocode = matching_languages[i]
-#   cs = cousins[cousins$Glottocode == glottocode,2:33] %>% as.character(as.vector(.))
-#   sb = siblings[siblings$Glottocode == glottocode,2:9] %>% as.character(as.vector(.))
-#   
-#   mc = max(nchar(c(cs, sb)))
-#   
-#   cousinXsiblings[i,] = outer(sb ,cs , get_dist, mc) %>% 
-#     .[lower.tri(.)] %>% 
-#     c(.)
-# }
-# dimnames(cousinXsiblings)
-# write.csv(cousinXsiblings, 'code/data/sibXcousin_matrix.csv', row.names = FALSE)

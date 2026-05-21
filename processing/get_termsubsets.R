@@ -47,21 +47,17 @@ terms = terms %>%
   slice(1) %>% 
   ungroup()
 
-## Wide format
-## convert this database to have one row per language and a column per parameter
-#terms_w = tidyr::spread(terms[,c("Glottocode", "Name.parameters", "Form")], key = "Name.parameters", value = "Form", )
+## Wide format: one row per language, one column per kin parameter
 terms_w = tidyr::spread(terms[,c("Language_ID", "Parameter", "Form")], key = "Parameter", value = "Form")
 terms_w = apply(terms_w, 2, clean_kinterms) %>% as.data.frame(.)
 terms_w$Glottocode = stringr::str_extract(terms_w$Language_ID, "[a-z]{4}[0-9]{4}[a-z]?$")
-#dim(terms_w)
 
 # reduce to a single glottocode
-terms_w = terms_w %>% 
-  group_by(Glottocode) %>% 
+terms_w = terms_w %>%
+  group_by(Glottocode) %>%
   slice(1) %>% # take the first occurance of each glottocode
   ungroup()
 dim(terms_w)
-#colnames(terms_w)
 
 # fill in subsidary terms
 hr = getHierarchicalRelations(terms_w)
@@ -83,9 +79,7 @@ terms_w = terms_w %>%
 ### Data subsets
 ## Siblings
 sibling_columns = str_detect(colnames(terms_w), "^(m|f)(e|y)(B|Z)$|Glottocode")
-#colnames(terms_w)[sibling_columns]
 siblings = terms_w[,sibling_columns] %>% filter(complete.cases(.))
-#dim(siblings)
 sib_test = all(colnames(siblings) %in% c("feB", "feZ", "fyB", "fyZ", "meB", "meZ", "myB", "myZ", "Glottocode"))
 
 write.csv(siblings, 'data/terms/siblings_terms.csv', row.names = FALSE, quote = FALSE, fileEncoding = 'utf8')
@@ -108,9 +102,7 @@ g1_test = ncol(g1) == 21 # 4 Parents siblings * 2 for e/y, + M & F, * 2 for Sex 
 
 ## G+2 [grandparent's generation]
 g2_columns = str_detect(colnames(terms_w), "^(m|f)(F|M)(F|M)$|Glottocode")
-#colnames(terms_w)[g2_columns]
 g2 = terms_w[,g2_columns] %>% filter(complete.cases(.))
-#dim(g2)
 write.csv(g2, 'data/terms/g2_terms.csv', row.names = FALSE, quote = FALSE, fileEncoding = 'utf8')
 g2_test = ncol(g2) == 9
 

@@ -26,11 +26,8 @@ for(k in kintype){
   
   x = assert_that(all(clusters$Glottocode_ID == structural_vectors$Glottocode))
   
-  # remove outliers since we don't care about their silhouette score
-  # idx = clusters$label_ != "Outlier"
-  # clusters = clusters[idx,]
-  # structural_vectors = structural_vectors[idx,]
-  
+  # outliers are retained so their silhouette score can be reported separately
+
   ## Silhouette requires clusters are integer codes
   labels_df = data.frame(label_ = sort(unique(clusters$label_)))
   labels_df$integers = 1:nrow(labels_df)

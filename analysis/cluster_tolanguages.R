@@ -73,8 +73,6 @@ languages = languages %>%
 
 x = assert_that(n_distinct(languages$Glottocode_ID) == nrow(languages))
 
-# x = assert_that(all(clusters_wide$Glottocode %in% languages$Glottocode_ID))
-
 language_clusters = left_join(languages, clusters_wide, by = c("Glottocode_ID" = "Glottocode"))
 
 write.csv(language_clusters, 'results/kinbank_wclusters.csv', row.names = FALSE)

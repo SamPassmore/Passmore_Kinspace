@@ -80,7 +80,6 @@ cluster_joined$nr_adjust = ifelse(cluster_joined$nr_type == 'none' & cluster_joi
                                   'type.5', as.character(cluster_joined$nr_adjust))
 
 
-# table(cluster_joined$label_adj, cluster_joined$nr_adjust)
 pdfCluster::adj.rand.index(cluster_joined$label_adj, cluster_joined$nr_adjust)
 
 # rand index of exact matches
@@ -118,12 +117,3 @@ p1 = ggplot(nr_long, aes(y = percent, x = plot_label, fill = name)) +
 
 ggsave(plot = p1, filename = "results/umap/sibling_frequency.pdf")
 
-# load("results/umap/siblings_ggplot.rdata")
-# 
-# p3 = pp + p1
-# 
-# pdf("results/figure_1.pdf", width = 8, height = 4)
-# p3
-# dev.off()
-# 
-# 
