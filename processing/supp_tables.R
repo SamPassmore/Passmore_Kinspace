@@ -21,13 +21,12 @@ for(k in kin_subsets){
   
   supp_table = 
     supp_table[,c("label_", "Kin Description", "frequency", 
-                  "Modal Count", "diversity", "centrality", "strength", "silhouette")]
+                  "Modal Count", "diversity")]
   
   supp_table[supp_table$label_ == "Outlier",c("Kin Description", "Modal Count", "diversity", "centrality", "strength", "silhouette")] = 
     NA
 
-  colnames(supp_table) = c("Label", "Description", "Count", "Modal Count", "Diversity", "Centrality", "Strength",
-                           "Silhouette")
+  colnames(supp_table) = c("Label", "Description", "Count", "Modal Count", "Diversity")
     
   
   assert_that(all(supp_table$frequency > supp_table$`Mode Count`))

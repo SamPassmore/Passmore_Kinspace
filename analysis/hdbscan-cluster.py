@@ -26,8 +26,15 @@ from sklearn.ensemble import ExtraTreesClassifier
 from matplotlib.colors import rgb2hex
 
 import random
+import argparse
+
 # description of distance metrics here:
 # https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html
+
+parser = argparse.ArgumentParser(description='Cluster kinship structural vectors with HDBSCAN')
+parser.add_argument('--figures', action='store_true', default=False,
+                    help='Save figure outputs (decision tree PDFs and UMAP scatter plots)')
+args = parser.parse_args()
 
 random.seed(10)
 
@@ -197,7 +204,8 @@ export_graphviz(clf, out_file=dot_data,
                 special_characters=True, feature_names = string_mat2.columns, class_names = class_names)
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/siblings_"+metric+".pdf")
+if args.figures:
+    graph.write_pdf(DIR+"results/decision-trees/siblings_"+metric+".pdf")
 
 #Image(graph.create_png())
 
@@ -228,10 +236,12 @@ reducer = umap.UMAP(
     spread = 10) # set random seed
 embedding = reducer.fit_transform(string_mat)
 
-fig, ax = plt.subplots()
-ax.scatter(x = embedding[:,0], y = embedding[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-ax.legend(handles=custom_scatter, loc='lower left', ncol = 3)
-#plt.show()
+if args.figures:
+    fig, ax = plt.subplots()
+    ax.scatter(x = embedding[:,0], y = embedding[:,1], s=50, linewidth=0, c=cluster_colors, alpha=0.8)
+    ax.legend(handles=custom_scatter, loc='lower left', ncol = 3)
+    plt.savefig(DIR+"results/umap/siblings_scatter.pdf")
+    plt.close()
 
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
 output = pd.concat([output, embeddings_df], axis=1)
@@ -430,7 +440,8 @@ export_graphviz(clf, out_file=dot_data,
                 special_characters=True, feature_names = FI_mat2.columns, class_names = class_names)
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/g1.pdf")
+if args.figures:
+    graph.write_pdf(DIR+"results/decision-trees/g1.pdf")
 
 #Image(graph.create_png())
 
@@ -657,7 +668,8 @@ export_graphviz(clf, out_file=dot_data,
                 special_characters=True, feature_names = FI_mat2.columns, class_names = class_names)
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/g0.pdf")
+if args.figures:
+    graph.write_pdf(DIR+"results/decision-trees/g0.pdf")
 
 #Image(graph.create_png())
 
@@ -688,12 +700,14 @@ reducer = umap.UMAP(
     spread = 10) # set random seed
 embedding = reducer.fit_transform(string_mat)
 
-fig, ax = plt.subplots()
-jittered_y = embedding[:,1] + 0.2 * np.random.rand(len(embedding[:,1])) -0.05
-jittered_x = embedding[:,0] + 0.2 * np.random.rand(len(embedding[:,0])) -0.05
-ax.scatter(x = jittered_x, y = jittered_y, s=50, linewidth=0, c=cluster_colors, alpha=0.8)
-ax.legend(handles=custom_scatter, loc='lower right', ncol = 3)
-plt.show()
+if args.figures:
+    fig, ax = plt.subplots()
+    jittered_y = embedding[:,1] + 0.2 * np.random.rand(len(embedding[:,1])) -0.05
+    jittered_x = embedding[:,0] + 0.2 * np.random.rand(len(embedding[:,0])) -0.05
+    ax.scatter(x = jittered_x, y = jittered_y, s=50, linewidth=0, c=cluster_colors, alpha=0.8)
+    ax.legend(handles=custom_scatter, loc='lower right', ncol = 3)
+    plt.savefig(DIR+"results/umap/g0_scatter.pdf")
+    plt.close()
 
 # save embeddings
 embeddings_df = pd.DataFrame(embedding, columns=list('XY'))
@@ -847,7 +861,8 @@ export_graphviz(clf, out_file=dot_data,
                 special_characters=True, feature_names = string_mat2.columns, class_names = class_names)
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/g2.pdf")
+if args.figures:
+    graph.write_pdf(DIR+"results/decision-trees/g2.pdf")
 
 label = [clusterer.labels_]
 color_palette = sns.color_palette('Paired', 47)
@@ -1072,7 +1087,8 @@ export_graphviz(clf, out_file=dot_data,
                 special_characters=True, feature_names = string_mat2.columns, class_names = class_names)
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 
-graph.write_pdf(DIR+"results/decision-trees/niblings.pdf")
+if args.figures:
+    graph.write_pdf(DIR+"results/decision-trees/niblings.pdf")
 
 #Image(graph.create_png())
 
