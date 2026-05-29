@@ -37,6 +37,7 @@ parser.add_argument('--figures', action='store_true', default=False,
 args = parser.parse_args()
 
 random.seed(10)
+np.random.seed(42)
 
 plot_kwds = {'alpha' : 0.5, 's' : 80, 'linewidths':0}
 
@@ -71,7 +72,7 @@ settings=[]
 for x in range(3, 11):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-        approx_min_span_tree=True,
+        approx_min_span_tree=False,
         gen_min_span_tree=True,
         leaf_size=100,
         metric=metric,
@@ -94,7 +95,7 @@ ms = int(settings['value'])
 print(int(ms))
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-    approx_min_span_tree=True,
+    approx_min_span_tree=False,
     gen_min_span_tree=True,
     leaf_size=100,
     metric=metric,
@@ -269,7 +270,7 @@ settings = []
 for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-        approx_min_span_tree=True,
+        approx_min_span_tree=False,
         gen_min_span_tree=True,
         leaf_size=100,
         metric=metric,
@@ -292,7 +293,7 @@ ms = int(settings['value'])
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-    approx_min_span_tree=True,
+    approx_min_span_tree=False,
     gen_min_span_tree=True,
     leaf_size=100,
     metric=metric,
@@ -368,7 +369,7 @@ print(FI_mat.shape)
 settings=[]
 for x in range(3, 12):
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-        approx_min_span_tree=True,
+        approx_min_span_tree=False,
         gen_min_span_tree=True,
         leaf_size=100,
         metric=metric,
@@ -389,7 +390,7 @@ settings = settings.loc[settings['outliers'].idxmin()]
 ms = int(settings['value'])
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-    approx_min_span_tree=True,
+    approx_min_span_tree=False,
     gen_min_span_tree=True,
     leaf_size=100,
     metric=metric,
@@ -495,7 +496,7 @@ settings = []
 for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-        approx_min_span_tree=True,
+        approx_min_span_tree=False,
         gen_min_span_tree=False,
         leaf_size=100,
         metric=metric,
@@ -518,7 +519,7 @@ ms = int(settings['value'])
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-    approx_min_span_tree=True,
+    approx_min_span_tree=False,
     gen_min_span_tree=True,
     leaf_size=100,
     metric=metric,
@@ -594,7 +595,7 @@ print(FI_mat.shape)
 settings=[]
 for x in range(3, 12):
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-        approx_min_span_tree=True,
+        approx_min_span_tree=False,
         gen_min_span_tree=True,
         leaf_size=100,
         metric=metric,
@@ -617,7 +618,7 @@ ms = int(settings['value'])
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-    approx_min_span_tree=True,
+    approx_min_span_tree=False,
     gen_min_span_tree=True,
     leaf_size=100,
     metric=metric,
@@ -734,7 +735,7 @@ settings = []
 for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-        approx_min_span_tree=True,
+        approx_min_span_tree=False,
         gen_min_span_tree=False,
         leaf_size=100,
         metric=metric,
@@ -757,7 +758,7 @@ ms = int(settings['value'])
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-    approx_min_span_tree=True,
+    approx_min_span_tree=False,
     gen_min_span_tree=True,
     leaf_size=100,
     metric=metric,
@@ -914,7 +915,7 @@ settings = []
 for x in range(3, 12):  # check from 3 to 11. 3 is HDBSCAN minimum (below is single chain linking)
                         # 11 was shown to decrease performance in simulations.
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-        approx_min_span_tree=True,
+        approx_min_span_tree=False,
         gen_min_span_tree=False,
         leaf_size=100,
         metric=metric,
@@ -937,7 +938,7 @@ ms = int(settings['value'])
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-    approx_min_span_tree=True,
+    approx_min_span_tree=False,
     gen_min_span_tree=True,
     leaf_size=100,
     metric=metric,
@@ -1013,7 +1014,7 @@ print(FI_mat.shape)
 settings=[]
 for x in range(3, 12):
     clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-        approx_min_span_tree=True,
+        approx_min_span_tree=False,
         gen_min_span_tree=True,
         leaf_size=100,
         metric=metric,
@@ -1036,7 +1037,7 @@ ms = int(settings['value'])
 print(ms)
 
 clusterer = HDBSCAN(algorithm='best', alpha=1.0,
-    approx_min_span_tree=True,
+    approx_min_span_tree=False,
     gen_min_span_tree=True,
     leaf_size=100,
     metric=metric,

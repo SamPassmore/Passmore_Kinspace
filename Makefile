@@ -45,6 +45,7 @@ cluster:
 	mkdir -p results/umap
 	mkdir -p results/tsne
 	mkdir -p results/hdbscan
+	mkdir -p results/descision-trees
 	myvenv/bin/python3 analysis/hdbscan-cluster.py $(FIGURES)
 	
 # Create global level frequency graphs 

@@ -39,7 +39,7 @@ cluster = cluster[!is.na(cluster[,paste0(type, "_hamming")]),]
 cluster$label_ = cluster[,paste0(type, "_hamming")]
 
 cluster_subset = cluster %>% 
-  filter(label_ > -1) %>% 
+  filter(label_ != "Outlier") %>% 
   filter(!is.na(Family_ID)) %>% 
   filter(Family_ID != "")
 
